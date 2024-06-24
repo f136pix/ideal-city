@@ -1,0 +1,18 @@
+{
+    "name": "filipe/scrapper",
+    "description": "php script for http requests",
+    "autoload": {
+        "psr-4": {
+            "Filipe\\Scrapper\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "filipe furlan"
+        }
+    ],
+    "require": {
+        "php-amqplib/rabbitmq-bundle": "^1.13",
+        "guzzlehttp/guzzle": "^7.8"
+    }
+}
