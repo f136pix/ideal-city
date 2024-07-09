@@ -1170,6 +1170,8 @@ class AMQPChannel extends AbstractChannel
                 $msg->body,
                 $pkt
             );
+            
+            return true;
         } catch (AMQPConnectionClosedException $e) {
             $this->do_close();
             throw $e;

@@ -1,0 +1,16 @@
+POST api/cities
+Content-Type: application/json
+
+{
+  "name": "string",
+  "countryName": "string",
+  "indicators": {
+    "costIndex": "string",
+    "publicTransportationIndex": "string",
+    "gasoline": "string",
+    "averageMonthlyNetSalary": "string"
+  },
+  "weather": {
+    "averageTemperature": "string"
+  }
+}

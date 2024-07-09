@@ -29,7 +29,7 @@ public class CityController : ApiController
         CreateCityCommand command = _mapper.Map<CreateCityCommand>(request);
         ErrorOr<City> result = await Invoke<City>(command);
         return result.Match(
-            city => CreatedAtAction(nameof(GetCity), new { id = city.Id }, city),
+            city => CreatedAtAction(nameof(GetCity), new { id = city.Id }, _mapper.Map<CityResponse>(city)),
             errors => Problem(errors)
         ) ?? Problem("An unexpected error occurred");
     }

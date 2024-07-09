@@ -36,8 +36,10 @@ public class ApiController : ControllerBase
         }
         catch (Exception e)
         {
+            Console.WriteLine("--> Erro");
+            Console.WriteLine(e.ToString());
             // result = Error.Failure(e.Message);
-            result = Error.Failure("An unexpected error occurred");
+            result = Error.Failure(description:"An unexpected error occurred");
         }
 
         return result;
@@ -80,16 +82,16 @@ public class ApiController : ControllerBase
 
         return ValidationProblem(modelStateDictionary);
     }
-
-
+    
     protected async Task<List<Error>?> ValidateRequest<T>(IRequest<T> request)
     {
         var commandType = request.GetType();
+        
         var validatorType = typeof(IValidator<>).MakeGenericType(commandType);
 
         //     var validator = HttpContext.RequestServices.GetService<IValidator<commandType>>();
-        dynamic validator = HttpContext.RequestServices.GetService(validatorType);
-
+        dynamic? validator = HttpContext.RequestServices.GetService(validatorType);
+                       
         if (validator == null)
         {
             List<Error> errors = new List<Error> { Error.NotFound(description: "Validator not found") };

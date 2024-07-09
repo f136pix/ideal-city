@@ -1,10 +1,8 @@
 using Application;
-using CrossCutting;
 using Infraestructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddCrossCutting();
 builder.Services.AddApplication();
 builder.Services.AddInfraestructure();
 

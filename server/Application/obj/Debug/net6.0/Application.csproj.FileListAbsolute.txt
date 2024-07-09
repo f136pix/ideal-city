@@ -1,0 +1,17 @@
+/home/filipe/Desktop/Projects/ideal-city/server/Application/bin/Debug/net6.0/Application.deps.json
+/home/filipe/Desktop/Projects/ideal-city/server/Application/bin/Debug/net6.0/Application.dll
+/home/filipe/Desktop/Projects/ideal-city/server/Application/bin/Debug/net6.0/ref/Application.dll
+/home/filipe/Desktop/Projects/ideal-city/server/Application/bin/Debug/net6.0/Application.pdb
+/home/filipe/Desktop/Projects/ideal-city/server/Application/bin/Debug/net6.0/Domain.dll
+/home/filipe/Desktop/Projects/ideal-city/server/Application/bin/Debug/net6.0/Domain.pdb
+/home/filipe/Desktop/Projects/ideal-city/server/Application/obj/Debug/net6.0/Application.csproj.AssemblyReference.cache
+/home/filipe/Desktop/Projects/ideal-city/server/Application/obj/Debug/net6.0/Application.GeneratedMSBuildEditorConfig.editorconfig
+/home/filipe/Desktop/Projects/ideal-city/server/Application/obj/Debug/net6.0/Application.AssemblyInfoInputs.cache
+/home/filipe/Desktop/Projects/ideal-city/server/Application/obj/Debug/net6.0/Application.AssemblyInfo.cs
+/home/filipe/Desktop/Projects/ideal-city/server/Application/obj/Debug/net6.0/Application.csproj.CoreCompileInputs.cache
+/home/filipe/Desktop/Projects/ideal-city/server/Application/obj/Debug/net6.0/Application.csproj.CopyComplete
+/home/filipe/Desktop/Projects/ideal-city/server/Application/obj/Debug/net6.0/Application.dll
+/home/filipe/Desktop/Projects/ideal-city/server/Application/obj/Debug/net6.0/ref/Application.dll
+/home/filipe/Desktop/Projects/ideal-city/server/Application/obj/Debug/net6.0/Application.pdb
+/home/filipe/Desktop/Projects/ideal-city/server/Application/bin/Debug/net6.0/Contracts.dll
+/home/filipe/Desktop/Projects/ideal-city/server/Application/bin/Debug/net6.0/Contracts.pdb
