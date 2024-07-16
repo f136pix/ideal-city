@@ -1,15 +1,25 @@
 namespace Domain.Common;
 
-public abstract class Entity<TGuid>
+public abstract class Entity<TGuid> : IHasDomainEvents
     where TGuid : notnull
 {
     public TGuid Id { get; private init; }
-
-    protected readonly List<IDomainEvent> _domainEvents = new List<IDomainEvent>();
+    private readonly List<IDomainEvent> _domainEvents = new();
+    public IReadOnlyList<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
 
     protected Entity(TGuid id)
     {
         Id = id;
+    }
+
+    public void AddDomainEvent(IDomainEvent domainEvent)
+    {
+        _domainEvents.Add(domainEvent);
+    }
+    
+    public void ClearDomainEvents()
+    {
+        _domainEvents.Clear();
     }
 
     public List<IDomainEvent> PopDomainEvents()
@@ -44,12 +54,11 @@ public abstract class Entity<TGuid>
     {
         return !(left == right);
     }
-    
+
     // parameterless ctor for ef 
 #pragma warning disable CS8618
     protected Entity()
     {
     }
 #pragma warning restore CS8618
-
 }

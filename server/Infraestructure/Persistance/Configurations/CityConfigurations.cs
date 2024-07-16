@@ -1,5 +1,6 @@
 using Domain.Cities;
 using Domain.City.ValueObjects;
+using Domain.CityAggregate;
 using Domain.Countries;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -13,6 +14,7 @@ public class CityConfigurations : IEntityTypeConfiguration<City>
         ConfigureCitiesTable(builder);
         ConfigureCityReviewsTable(builder);
         ConfigureCityReviewsIdsTable(builder);
+        ConfigureCityFavouritesRelation(builder);
     }
 
 
@@ -23,6 +25,7 @@ public class CityConfigurations : IEntityTypeConfiguration<City>
         // CITY ID
         builder.HasKey(c => c.Id);
         builder.Property(c => c.Id)
+            .HasColumnName("Id")
             .ValueGeneratedNever()
             .HasConversion(
                 id => id.Value, // when sending to the database sends the id value
@@ -66,6 +69,15 @@ public class CityConfigurations : IEntityTypeConfiguration<City>
             ab.Property(ar => ar.TotalRatings)
                 .HasColumnName("AverageRatingTotalRatings");
         });
+        
+        // ONE CITY HAS MANY USERS
+        // builder.HasMany(c => c.Users)
+        //     .WithOne(c => c.City)
+        //     .HasForeignKey("CityId")
+        //     .OnDelete(DeleteBehavior.Cascade);
+        //
+        // builder.Metadata.FindNavigation(nameof(City.Users))!
+        //     .SetPropertyAccessMode(PropertyAccessMode.Field);
     }
 
     private void ConfigureCityReviewsTable(EntityTypeBuilder<City> builder)
@@ -116,5 +128,9 @@ public class CityConfigurations : IEntityTypeConfiguration<City>
 
         builder.Metadata.FindNavigation(nameof(City.ReviewsIds))!
             .SetPropertyAccessMode(PropertyAccessMode.Field); // MODE THAT USES THE _reviewsIds AS A BACKING FIELD
+    }
+
+    private void ConfigureCityFavouritesRelation(EntityTypeBuilder<City> builder)
+    {
     }
 }

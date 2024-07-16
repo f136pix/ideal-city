@@ -1,6 +1,7 @@
 using Application.Cities.Commands.CreateCity;
 using Contracts.Cities;
 using Domain.Cities;
+using Domain.CityAggregate;
 using ErrorOr;
 using FluentValidation;
 using MapsterMapper;
@@ -13,11 +14,8 @@ namespace Api.Controllers;
 [Route("/api/cities")]
 public class CityController : ApiController
 {
-    private readonly IMapper _mapper;
-
-    public CityController(IMapper mapper, ISender mediator) : base(mediator)
+    public CityController(ISender mediator, IMapper mapper) : base(mediator, mapper)
     {
-        _mapper = mapper;
     }
 
     [HttpPost]

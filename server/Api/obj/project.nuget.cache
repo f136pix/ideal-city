@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "DjXAoVpkmAapFGmgNSEPnXDXPiclXm1ypnD9/ngFN7xvlT2dNhf6G9atGOmvILqtEVSBUP3qaebkdrBC4WdWLQ==",
+  "dgSpecHash": "qItTw0B7E4ahtFNQaRXXHp3jhXarmyH07UvPgQzel1/veZCLnrzs2BBvOX34QWoluwlDMR2EEdTNhL5fd11Oww==",
   "success": true,
   "projectFilePath": "/home/filipe/Desktop/Projects/ideal-city/server/Api/Api.csproj",
   "expectedPackageFiles": [
@@ -32,6 +32,11 @@
     "/home/filipe/.nuget/packages/microsoft.extensions.logging.abstractions/7.0.0/microsoft.extensions.logging.abstractions.7.0.0.nupkg.sha512",
     "/home/filipe/.nuget/packages/microsoft.extensions.options/7.0.0/microsoft.extensions.options.7.0.0.nupkg.sha512",
     "/home/filipe/.nuget/packages/microsoft.extensions.primitives/7.0.0/microsoft.extensions.primitives.7.0.0.nupkg.sha512",
+    "/home/filipe/.nuget/packages/microsoft.identity.client/4.61.3/microsoft.identity.client.4.61.3.nupkg.sha512",
+    "/home/filipe/.nuget/packages/microsoft.identitymodel.abstractions/8.0.0-preview1/microsoft.identitymodel.abstractions.8.0.0-preview1.nupkg.sha512",
+    "/home/filipe/.nuget/packages/microsoft.identitymodel.jsonwebtokens/8.0.0-preview1/microsoft.identitymodel.jsonwebtokens.8.0.0-preview1.nupkg.sha512",
+    "/home/filipe/.nuget/packages/microsoft.identitymodel.logging/8.0.0-preview1/microsoft.identitymodel.logging.8.0.0-preview1.nupkg.sha512",
+    "/home/filipe/.nuget/packages/microsoft.identitymodel.tokens/8.0.0-preview1/microsoft.identitymodel.tokens.8.0.0-preview1.nupkg.sha512",
     "/home/filipe/.nuget/packages/microsoft.openapi/1.2.3/microsoft.openapi.1.2.3.nupkg.sha512",
     "/home/filipe/.nuget/packages/mono.texttemplating/2.2.1/mono.texttemplating.2.2.1.nupkg.sha512",
     "/home/filipe/.nuget/packages/npgsql/7.0.0/npgsql.7.0.0.nupkg.sha512",
@@ -42,6 +47,8 @@
     "/home/filipe/.nuget/packages/swashbuckle.aspnetcore.swaggerui/6.5.0/swashbuckle.aspnetcore.swaggerui.6.5.0.nupkg.sha512",
     "/home/filipe/.nuget/packages/system.codedom/4.4.0/system.codedom.4.4.0.nupkg.sha512",
     "/home/filipe/.nuget/packages/system.componentmodel.annotations/5.0.0/system.componentmodel.annotations.5.0.0.nupkg.sha512",
+    "/home/filipe/.nuget/packages/system.diagnostics.diagnosticsource/6.0.1/system.diagnostics.diagnosticsource.6.0.1.nupkg.sha512",
+    "/home/filipe/.nuget/packages/system.identitymodel.tokens.jwt/8.0.0-preview1/system.identitymodel.tokens.jwt.8.0.0-preview1.nupkg.sha512",
     "/home/filipe/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.0/system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "/home/filipe/.nuget/packages/system.text.encodings.web/7.0.0/system.text.encodings.web.7.0.0.nupkg.sha512",
     "/home/filipe/.nuget/packages/system.text.json/7.0.0/system.text.json.7.0.0.nupkg.sha512"

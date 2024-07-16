@@ -1,4 +1,5 @@
 using Domain.Cities;
+using Domain.CityAggregate;
 using ErrorOr;
 using MediatR;
 

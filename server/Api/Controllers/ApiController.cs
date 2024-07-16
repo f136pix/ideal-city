@@ -3,6 +3,7 @@ using Contracts.Cities;
 using ErrorOr;
 using FluentValidation;
 using FluentValidation.Results;
+using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -14,10 +15,12 @@ namespace Api.Controllers;
 public class ApiController : ControllerBase
 {
     protected readonly ISender Mediator;
+    protected readonly IMapper _mapper;
 
-    protected ApiController(ISender mediator)
+    protected ApiController(ISender mediator, IMapper mapper)
     {
         Mediator = mediator;
+        _mapper = mapper;
     }
 
     public async Task<ErrorOr<T>> Invoke<T>(IRequest<ErrorOr<T>> command)
@@ -34,12 +37,12 @@ public class ApiController : ControllerBase
         {
             result = await Mediator.Send(command);
         }
-        catch (Exception e)
+        catch (Exception e) // Catching unmapped/ unthrown exceptions
         {
             Console.WriteLine("--> Erro");
             Console.WriteLine(e.ToString());
             // result = Error.Failure(e.Message);
-            result = Error.Failure(description:"An unexpected error occurred");
+            result = Error.Failure(description: "An unexpected error occurred");
         }
 
         return result;
@@ -82,29 +85,38 @@ public class ApiController : ControllerBase
 
         return ValidationProblem(modelStateDictionary);
     }
-    
+
     protected async Task<List<Error>?> ValidateRequest<T>(IRequest<T> request)
     {
         var commandType = request.GetType();
-        
         var validatorType = typeof(IValidator<>).MakeGenericType(commandType);
 
         //     var validator = HttpContext.RequestServices.GetService<IValidator<commandType>>();
-        dynamic? validator = HttpContext.RequestServices.GetService(validatorType);
-                       
-        if (validator == null)
+        dynamic? validator = HttpContext.RequestServices.GetService(validatorType); // IValidator<TRequest>
+
+        // if (validator == null)
+        // {
+        //     List<Error> errors = new List<Error> { Error.NotFound(description: "Validator not found for command") };
+        //     return errors;
+        // }
+
+        if (validator is not null)
         {
-            List<Error> errors = new List<Error> { Error.NotFound(description: "Validator not found") };
-            return errors;
+            ValidationResult
+                validationResult =
+                    await validator.ValidateAsync(
+                        (dynamic)request); // needs being dynamic since request type changes at each runtime
+            // ValidationResult validationResult = await validator.ValidateAsync(request);
+            if (!validationResult.IsValid)
+            {
+                List<Error> errors = FormatValidationErrors(validationResult.Errors);
+                return errors;
+            }
+
+            return null;
         }
 
-        ValidationResult validationResult = await validator.ValidateAsync((dynamic)request);
-        if (!validationResult.IsValid)
-        {
-            List<Error> errors = FormatValidationErrors(validationResult.Errors);
-            return errors;
-        }
-
+        // command doesnt have validator
         return null;
     }
 

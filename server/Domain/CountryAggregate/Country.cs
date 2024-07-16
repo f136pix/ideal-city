@@ -1,33 +1,35 @@
-using Domain.Cities;
 using Domain.City.ValueObjects;
 using Domain.Common;
 using Domain.Countries;
 
+namespace Domain.CountryAggregate;
+
 public class Country : AggregateRoot<CountryId>
 {
-    
-    private readonly List<City> _cities = new();
+    private readonly List<CityAggregate.City> _cities = new();
     private readonly List<CityId> _cityIds = new();
-
     public string Name { get; private set; }
-
-    public IReadOnlyList<City> Cities => _cities.AsReadOnly();
+    public IReadOnlyList<CityAggregate.City> Cities => _cities.AsReadOnly();
     public IReadOnlyList<CityId> CityIds => _cityIds.AsReadOnly();
 
-    private Country(CountryId id, string name, List<CityId> citiesIds) : base(id)
+    private Country(CountryId id, string name) : base(id)
     {
         Name = name;
-        _cityIds = citiesIds;
     }
 
-    public static Country Create(string name, List<CityId> citiesIds)
+    public static Country Create(string name)
     {
-        var country = new Country(CountryId.CreateUnique(), name, citiesIds);
+        var country = new Country(CountryId.CreateUnique(), name);
 
         // pushes domain event
         // country._domainEvents.Add();
 
         return country;
+    }
+
+    public void AddCityId(CityId cityId)
+    {
+        _cityIds.Add(cityId);
     }
 
 #pragma warning disable CS8618

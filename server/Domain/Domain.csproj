@@ -20,7 +20,7 @@
 
     <ItemGroup>
       <Folder Include="CountryAggregate\Entitiy\" />
-      <Folder Include="User\" />
+      <Folder Include="UserAggregate\Events\" />
     </ItemGroup>
 
 </Project>

@@ -16,11 +16,6 @@ public sealed class CountryId : ValueObject
         return new CountryId(value);
     }
     
-    public static CountryId Create(string value)
-    {
-        return new CountryId(Guid.Parse(value));
-    }
-
     public static CountryId CreateUnique()
     {
         return new CountryId(Guid.NewGuid());

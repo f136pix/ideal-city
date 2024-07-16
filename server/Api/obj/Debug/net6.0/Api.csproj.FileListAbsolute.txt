@@ -66,3 +66,10 @@
 /home/filipe/Desktop/Projects/ideal-city/server/Api/bin/Debug/net6.0/System.Text.Encodings.Web.dll
 /home/filipe/Desktop/Projects/ideal-city/server/Api/bin/Debug/net6.0/System.Text.Json.dll
 /home/filipe/Desktop/Projects/ideal-city/server/Api/bin/Debug/net6.0/runtimes/browser/lib/net6.0/System.Text.Encodings.Web.dll
+/home/filipe/Desktop/Projects/ideal-city/server/Api/bin/Debug/net6.0/Microsoft.Identity.Client.dll
+/home/filipe/Desktop/Projects/ideal-city/server/Api/bin/Debug/net6.0/Microsoft.IdentityModel.Abstractions.dll
+/home/filipe/Desktop/Projects/ideal-city/server/Api/bin/Debug/net6.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/home/filipe/Desktop/Projects/ideal-city/server/Api/bin/Debug/net6.0/Microsoft.IdentityModel.Logging.dll
+/home/filipe/Desktop/Projects/ideal-city/server/Api/bin/Debug/net6.0/Microsoft.IdentityModel.Tokens.dll
+/home/filipe/Desktop/Projects/ideal-city/server/Api/bin/Debug/net6.0/System.Diagnostics.DiagnosticSource.dll
+/home/filipe/Desktop/Projects/ideal-city/server/Api/bin/Debug/net6.0/System.IdentityModel.Tokens.Jwt.dll

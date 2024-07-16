@@ -73,3 +73,4 @@ User:
 
 ### Migration CLI   
 `dotnet ef database update -p Infraestructure -s Api`
+`dotnet ef migrations add UserTable -p Infraestructure -s Api`

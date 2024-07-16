@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "USz5ZkIhylPBGXXuk11JXJ+Iylj4vodK0xYY9+qI4e4Ube0eCFD2qTW3lddiGXbCMZGAH/TLnyOmzCgdaZiemQ==",
+  "dgSpecHash": "YwTPsyYNOmrzebfHJvinZ/Xb4i6nUdU58RthL06tgnzPUkTRXG3YKgO0GQMIAqvWLb3wXFN+2YpEPOqzxl1ZpQ==",
   "success": true,
   "projectFilePath": "/home/filipe/Desktop/Projects/ideal-city/server/Infraestructure/Infraestructure.csproj",
   "expectedPackageFiles": [
@@ -28,9 +28,16 @@
     "/home/filipe/.nuget/packages/microsoft.extensions.logging.abstractions/7.0.0/microsoft.extensions.logging.abstractions.7.0.0.nupkg.sha512",
     "/home/filipe/.nuget/packages/microsoft.extensions.options/7.0.0/microsoft.extensions.options.7.0.0.nupkg.sha512",
     "/home/filipe/.nuget/packages/microsoft.extensions.primitives/7.0.0/microsoft.extensions.primitives.7.0.0.nupkg.sha512",
+    "/home/filipe/.nuget/packages/microsoft.identity.client/4.61.3/microsoft.identity.client.4.61.3.nupkg.sha512",
+    "/home/filipe/.nuget/packages/microsoft.identitymodel.abstractions/8.0.0-preview1/microsoft.identitymodel.abstractions.8.0.0-preview1.nupkg.sha512",
+    "/home/filipe/.nuget/packages/microsoft.identitymodel.jsonwebtokens/8.0.0-preview1/microsoft.identitymodel.jsonwebtokens.8.0.0-preview1.nupkg.sha512",
+    "/home/filipe/.nuget/packages/microsoft.identitymodel.logging/8.0.0-preview1/microsoft.identitymodel.logging.8.0.0-preview1.nupkg.sha512",
+    "/home/filipe/.nuget/packages/microsoft.identitymodel.tokens/8.0.0-preview1/microsoft.identitymodel.tokens.8.0.0-preview1.nupkg.sha512",
     "/home/filipe/.nuget/packages/npgsql/7.0.0/npgsql.7.0.0.nupkg.sha512",
     "/home/filipe/.nuget/packages/npgsql.entityframeworkcore.postgresql/7.0.0/npgsql.entityframeworkcore.postgresql.7.0.0.nupkg.sha512",
     "/home/filipe/.nuget/packages/system.componentmodel.annotations/5.0.0/system.componentmodel.annotations.5.0.0.nupkg.sha512",
+    "/home/filipe/.nuget/packages/system.diagnostics.diagnosticsource/6.0.1/system.diagnostics.diagnosticsource.6.0.1.nupkg.sha512",
+    "/home/filipe/.nuget/packages/system.identitymodel.tokens.jwt/8.0.0-preview1/system.identitymodel.tokens.jwt.8.0.0-preview1.nupkg.sha512",
     "/home/filipe/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.0/system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
   ],
   "logs": [

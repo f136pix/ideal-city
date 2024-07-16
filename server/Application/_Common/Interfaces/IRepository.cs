@@ -2,9 +2,9 @@ using Domain.Common;
 
 namespace Application._Common.Interfaces;
 
-public interface IRepository<T> 
+public interface IRepository<T>
 {
-    Task<IReadOnlyList<T>> GetAllAsync();
-    Task<T> AddAsync(T entity);
-    Task<T> UpdateAsync(T entity);
+    public abstract Task<IReadOnlyList<T>> GetAllAsync();
+    public abstract Task<T> AddAsync(T entity);
+    public abstract Task<T> UpdateAsync(T entity);
 }

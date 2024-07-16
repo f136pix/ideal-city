@@ -22,25 +22,26 @@ namespace Infraestructure.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Country", b =>
+            modelBuilder.Entity("CityUser", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("FavouriteCitiesId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                    b.Property<Guid>("FavouritedByUsersId")
+                        .HasColumnType("uuid");
 
-                    b.HasKey("Id");
+                    b.HasKey("FavouriteCitiesId", "FavouritedByUsersId");
 
-                    b.ToTable("Countries", (string)null);
+                    b.HasIndex("FavouritedByUsersId");
+
+                    b.ToTable("CityUser");
                 });
 
-            modelBuilder.Entity("Domain.Cities.City", b =>
+            modelBuilder.Entity("Domain.CityAggregate.City", b =>
                 {
                     b.Property<Guid>("Id")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("Id");
 
                     b.Property<Guid>("CountryId")
                         .HasColumnType("uuid");
@@ -57,33 +58,79 @@ namespace Infraestructure.Migrations
                     b.ToTable("Cities", (string)null);
                 });
 
-            modelBuilder.Entity("Country", b =>
+            modelBuilder.Entity("Domain.CountryAggregate.Country", b =>
                 {
-                    b.OwnsMany("Domain.City.ValueObjects.CityId", "CityIds", b1 =>
-                        {
-                            b1.Property<Guid>("CountryId")
-                                .HasColumnType("uuid");
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
 
-                            b1.Property<int>("Id")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("integer");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
-                            NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b1.Property<int>("Id"));
+                    b.HasKey("Id");
 
-                            b1.HasKey("CountryId", "Id");
-
-                            b1.ToTable("CityId");
-
-                            b1.WithOwner()
-                                .HasForeignKey("CountryId");
-                        });
-
-                    b.Navigation("CityIds");
+                    b.ToTable("Countries", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Cities.City", b =>
+            modelBuilder.Entity("Domain.UserAggregate.User", b =>
                 {
-                    b.HasOne("Country", "Country")
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid")
+                        .HasColumnName("Id");
+
+                    b.Property<string>("Bio")
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)");
+
+                    b.Property<Guid?>("CityId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("CityId");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<string>("ProfilePicture")
+                        .HasMaxLength(300)
+                        .HasColumnType("character varying(300)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CityId");
+
+                    b.ToTable("Users", (string)null);
+                });
+
+            modelBuilder.Entity("CityUser", b =>
+                {
+                    b.HasOne("Domain.CityAggregate.City", null)
+                        .WithMany()
+                        .HasForeignKey("FavouriteCitiesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.UserAggregate.User", null)
+                        .WithMany()
+                        .HasForeignKey("FavouritedByUsersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.CityAggregate.City", b =>
+                {
+                    b.HasOne("Domain.CountryAggregate.Country", "Country")
                         .WithMany("Cities")
                         .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -223,7 +270,79 @@ namespace Infraestructure.Migrations
                     b.Navigation("Weather");
                 });
 
-            modelBuilder.Entity("Country", b =>
+            modelBuilder.Entity("Domain.CountryAggregate.Country", b =>
+                {
+                    b.OwnsMany("Domain.City.ValueObjects.CityId", "CityIds", b1 =>
+                        {
+                            b1.Property<int>("Id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("integer");
+
+                            NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b1.Property<int>("Id"));
+
+                            b1.Property<Guid>("CountryId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<Guid>("Value")
+                                .HasColumnType("uuid")
+                                .HasColumnName("CityId");
+
+                            b1.HasKey("Id");
+
+                            b1.HasIndex("CountryId");
+
+                            b1.ToTable("CountryCitiesIds", (string)null);
+
+                            b1.WithOwner()
+                                .HasForeignKey("CountryId");
+                        });
+
+                    b.Navigation("CityIds");
+                });
+
+            modelBuilder.Entity("Domain.UserAggregate.User", b =>
+                {
+                    b.HasOne("Domain.CityAggregate.City", "City")
+                        .WithMany("Users")
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.OwnsOne("Domain.User.ValueObject.Subscription", "Subscription", b1 =>
+                        {
+                            b1.Property<Guid>("UserId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<DateTime>("ExpirationDate")
+                                .HasColumnType("timestamp with time zone")
+                                .HasColumnName("ExpirationDate");
+
+                            b1.Property<bool>("IsActive")
+                                .HasColumnType("boolean");
+
+                            b1.Property<int>("SubscriptionType")
+                                .HasColumnType("integer")
+                                .HasColumnName("SubscriptionType");
+
+                            b1.HasKey("UserId");
+
+                            b1.ToTable("Users");
+
+                            b1.WithOwner()
+                                .HasForeignKey("UserId");
+                        });
+
+                    b.Navigation("City");
+
+                    b.Navigation("Subscription")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.CityAggregate.City", b =>
+                {
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("Domain.CountryAggregate.Country", b =>
                 {
                     b.Navigation("Cities");
                 });

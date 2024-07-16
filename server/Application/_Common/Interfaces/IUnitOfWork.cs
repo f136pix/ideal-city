@@ -1,6 +1,6 @@
 namespace Application._Common.Interfaces;
 
-public class IUnitOfWork
+public interface IUnitOfWork
 {
-    
+    Task CommitAsync();
 }
