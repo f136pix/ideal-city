@@ -20,6 +20,9 @@ public class CountryMappingConfig : IRegister
         config.NewConfig<Country, CountryResponse>()
             .Map(dest => dest.Id, src => src.Id.Value.ToString());
         
+        config.NewConfig<CityCreated, AddCityToCountryCommand>()
+            .Map(dest => dest.City, src => src.City);
+        
         
     }
 }

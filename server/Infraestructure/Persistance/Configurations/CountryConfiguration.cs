@@ -11,7 +11,7 @@ public class CountryConfiguration : IEntityTypeConfiguration<Country>
     {
         ConfigureCountriesTable(builder);
         ConfigureCitiesRelation(builder);
-        ConfigureCitiesIdsRelation(builder);
+        // ConfigureCitiesIdsRelation(builder);
     }
 
     private void ConfigureCountriesTable(EntityTypeBuilder<Country> builder)
@@ -29,6 +29,9 @@ public class CountryConfiguration : IEntityTypeConfiguration<Country>
         // COUNTRY NAME
         builder.Property(c => c.Name)
             .HasMaxLength(100);
+
+        // CITIES IDS - IGNORE SINCE ARE USED ONLY FOR NAVIGATION
+        builder.Ignore(c => c.CityIds);
     }
 
     private void ConfigureCitiesRelation(EntityTypeBuilder<Country> builder)
@@ -36,7 +39,7 @@ public class CountryConfiguration : IEntityTypeConfiguration<Country>
         // CITIES AGGREGATES
         builder.HasMany(c => c.Cities)
             .WithOne(c => c.Country)
-            .HasForeignKey("CountryId") // CITIES table has foreign key to countryId
+            .HasForeignKey(c => c.CountryId) // CITIES table has foreign key to countryId
             .OnDelete(DeleteBehavior.Cascade);
 
         builder.Metadata.FindNavigation(nameof(Country.Cities))!

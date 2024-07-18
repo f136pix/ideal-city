@@ -11,8 +11,9 @@ namespace Domain.CityAggregate;
 public sealed class City : AggregateRoot<CityId>
 {
     private readonly List<CityReview> _reviews = new();
-    private readonly List<CityReviewId> _reviewsIds = new();
-    // private readonly List<UserAggregate.User> _users = new();
+    private List<CityReviewId>? _reviewsIds => GetReviewsIds();
+    private readonly List<UserAggregate.User> _users = new();
+    private List<UserId> _usersIds => GetUsersIds();
     // private readonly List<UserAggregate.User> _favouritedByUsers = new();
 
     public string Name { get; private set; }
@@ -21,9 +22,10 @@ public sealed class City : AggregateRoot<CityId>
     public Indicator? Indicators { get; private set; }
     public Weather? Weather { get; private set; }
     public AverageRating? AverageRating { get; private set; }
-    public IReadOnlyList<CityReview> Reviews => _reviews.AsReadOnly();
-    public IReadOnlyList<CityReviewId> ReviewsIds => _reviewsIds.AsReadOnly();
-    // public IReadOnlyList<UserAggregate.User>? Users => _users.AsReadOnly();
+    public IReadOnlyList<CityReview>? Reviews => _reviews.AsReadOnly();
+    public IReadOnlyList<CityReviewId>? ReviewsIds => _reviewsIds.AsReadOnly();
+    public IReadOnlyList<UserAggregate.User>? Users => _users.AsReadOnly();
+    public IReadOnlyList<UserId> UsersIds => _usersIds.AsReadOnly();
     // public IReadOnlyList<UserAggregate.User>? FavouritedByUsers => _favouritedByUsers.AsReadOnly();
 
 
@@ -59,6 +61,24 @@ public sealed class City : AggregateRoot<CityId>
     public void SetCountry(CountryId countryId) // sets the country of a city
     {
         CountryId = countryId;
+    }
+
+    private List<CityReviewId> GetReviewsIds()
+    {
+        var reviewsIds =
+            from review in Reviews
+            select review.Id;
+
+        return reviewsIds.ToList();
+    }
+
+    private List<UserId> GetUsersIds()
+    {
+        var userIds =
+            from user in Users
+            select user.Id;
+
+        return userIds.ToList();
     }
 
     // parameterless ctor for ef

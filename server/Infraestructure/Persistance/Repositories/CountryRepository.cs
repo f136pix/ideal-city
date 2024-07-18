@@ -18,7 +18,7 @@ public class CountryRepository : ICountryRepository
     {
         return _dbContext.Countries
             .Include(c => c.Cities)
-            .Include(c => c.CityIds)
+            // .Include(c => c.CityIds)
             .FirstOrDefaultAsync(c => c.Id == id);
     }
 

@@ -66,9 +66,13 @@ City:
 - Wheather 
 - CityReviews[] 
     -UserId
+- CityReviewIds[]
     
 User:
 - CityReviewsId[] 
+- Posts[]
+- PostIds[]
+- Subscription // value object
 ```
 
 ### Migration CLI   

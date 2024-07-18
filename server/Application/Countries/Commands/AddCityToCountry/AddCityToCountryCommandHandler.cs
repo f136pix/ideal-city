@@ -25,7 +25,6 @@ public class AddCityToCountryCommandHandler : IRequestHandler<AddCityToCountryCo
     {
         City city = request.City;
         city.SetCountry(city.CountryId);
-        city.Country.AddCityId(city.Id); // adds the city to the country helper table that keeps tracks of it CitiesIds
 
         await _uow.CommitAsync();
 

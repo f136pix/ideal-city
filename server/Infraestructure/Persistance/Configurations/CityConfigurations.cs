@@ -13,7 +13,7 @@ public class CityConfigurations : IEntityTypeConfiguration<City>
     {
         ConfigureCitiesTable(builder);
         ConfigureCityReviewsTable(builder);
-        ConfigureCityReviewsIdsTable(builder);
+        // ConfigureCityReviewsIdsTable(builder);
         ConfigureCityFavouritesRelation(builder);
     }
 
@@ -69,15 +69,18 @@ public class CityConfigurations : IEntityTypeConfiguration<City>
             ab.Property(ar => ar.TotalRatings)
                 .HasColumnName("AverageRatingTotalRatings");
         });
-        
+
+        builder.Ignore(c => c.ReviewsIds);
+        builder.Ignore(c => c.UsersIds);
+
         // ONE CITY HAS MANY USERS
-        // builder.HasMany(c => c.Users)
-        //     .WithOne(c => c.City)
-        //     .HasForeignKey("CityId")
-        //     .OnDelete(DeleteBehavior.Cascade);
-        //
-        // builder.Metadata.FindNavigation(nameof(City.Users))!
-        //     .SetPropertyAccessMode(PropertyAccessMode.Field);
+        builder.HasMany(c => c.Users)
+            .WithOne(c => c.City)
+            .HasForeignKey(u => u.CityId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.Metadata.FindNavigation(nameof(City.Users))!
+            .SetPropertyAccessMode(PropertyAccessMode.Field);
     }
 
     private void ConfigureCityReviewsTable(EntityTypeBuilder<City> builder)
@@ -87,18 +90,28 @@ public class CityConfigurations : IEntityTypeConfiguration<City>
             rb.ToTable("CityReviews");
 
             // FOREIGN KEY TO CITY TABLE
-            rb.WithOwner().HasForeignKey("CityId");
-            // rb.WithOwner("City").HasForeignKey("CityId");    
-
+            rb.WithOwner(r => r.City)
+                .HasForeignKey(r => r.CityId)
+                .HasPrincipalKey(c => c.Id);
+            
+            
             // INDEXES
-            rb.HasKey(nameof(CityReview.Id), "CityId");
+            rb.HasKey(nameof(CityReview.Id));
 
             rb.Property(r => r.Id)
-                .HasColumnName("CityReviewId")
+                .HasColumnName("Id")
                 .ValueGeneratedNever()
                 .HasConversion(
                     id => id.Value,
                     value => CityReviewId.Create(value));
+
+            rb.Property(r => r.CityId)
+                .HasColumnName("CityId")
+                .ValueGeneratedNever()
+                .HasConversion(
+                    id => id.Value,
+                    value => CityId.Create(value))
+                .IsRequired();
 
             rb.Property(r => r.Review)
                 .HasMaxLength(1000);

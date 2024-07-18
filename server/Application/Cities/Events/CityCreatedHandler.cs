@@ -1,6 +1,7 @@
 using Application._Common.Interfaces;
 using Application.Countries.Commands.AddCityToCountry;
 using Domain.Cities.Events;
+using Domain.CityAggregate;
 using FluentValidation;
 using MapsterMapper;
 using MediatR;
@@ -26,7 +27,9 @@ public class CityCreatedHandler : INotificationHandler<CityCreated>
 
     public async Task Handle(CityCreated notification, CancellationToken cancellationToken)
     {
-        AddCityToCountryCommand command = _mapper.Map<AddCityToCountryCommand>(notification.City);
+        // AddCityToCountryCommand command = _mapper.Map<AddCityToCountryCommand>(notification);
+        AddCityToCountryCommand command = new AddCityToCountryCommand(notification.City);
+       
         var res = await _service.ValidateAndExecute(_addCityToCountryCommandValidator, command);
     }
 }

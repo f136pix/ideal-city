@@ -1,23 +1,26 @@
+using System.Collections.ObjectModel;
 using Domain.City.ValueObjects;
 using Domain.Common;
+using Domain.User.Entities;
 using Domain.User.ValueObject;
 
 namespace Domain.UserAggregate;
 
 public sealed class User : AggregateRoot<UserId>
 {
-    private readonly List<CityAggregate.City> _favouriteCities = new();
-    private readonly List<CityId> _favouriteCitiesIds = new();
-
+    private readonly List<Post> _posts = new();
+    private List<PostId> _postIds => GetPostsIds();
     public string Name { get; private set; }
     public string Email { get; private set; }
     public Subscription Subscription { get; private set; }
+    public SubscriptionId SubscriptionId { get; private set; }
     public CityAggregate.City? City { get; private set; }
     public CityId CityId { get; private set; }
     public string Password { get; private set; }
     public string? ProfilePicture { get; private set; }
     public string? Bio { get; private set; }
-    public IReadOnlyList<CityAggregate.City> FavouriteCities => _favouriteCities.AsReadOnly();
+    public IReadOnlyList<Post> Posts => _posts.AsReadOnly();
+    public IReadOnlyList<PostId> PostIds => _postIds.AsReadOnly();
 
 
     private User(UserId userId, string name, string email, CityAggregate.City city, CityId cityId, string password,
@@ -25,7 +28,7 @@ public sealed class User : AggregateRoot<UserId>
     {
         Name = name;
         Email = email;
-        Subscription = Subscription.Create();
+        // Subscription = Subscription.Create();
         City = city;
         CityId = cityId;
         Password = password;
@@ -50,11 +53,21 @@ public sealed class User : AggregateRoot<UserId>
 
         return user;
     }
-    
+
+    private List<PostId> GetPostsIds()
+    {
+        // return Posts.Select(p => p.Id).ToList();
+
+        var postIds =
+            from post in Posts
+            select post.Id;
+
+        return postIds.ToList();
+    }
+
 #pragma warning disable CS8618
     public User()
     {
-
     }
 #pragma warning restore CS8618
 }

@@ -1,12 +1,15 @@
+using System.Collections.ObjectModel;
 using Domain.Common;
 
 namespace Domain.User.ValueObject;
 
-public class Subscription : Common.ValueObject
+public class Subscription : Entity<SubscriptionId>
 {
-    public SubscriptionType SubscriptionType { get; private set; }
+    private readonly List<UserAggregate.User> _users = new();
+    // public SubscriptionType SubscriptionType { get; private set; }
     public DateTime ExpirationDate { get; private set; }
     public bool IsActive { get; private set; } = false;
+    public ReadOnlyCollection<UserAggregate.User> Users => _users.AsReadOnly();
 
     public static Subscription Create()
     {
@@ -15,7 +18,7 @@ public class Subscription : Common.ValueObject
 
     private Subscription(SubscriptionType subscriptionType, DateTime expirationDate)
     {
-        SubscriptionType = subscriptionType;
+        // SubscriptionType = subscriptionType;
         ExpirationDate = expirationDate;
     }
 
@@ -31,14 +34,12 @@ public class Subscription : Common.ValueObject
 
     public int GetMaxPostsAccessed()
     {
-        return SubscriptionType.GetMaxPostsAccessed();
+        return 5;
+        // return SubscriptionType.GetMaxPostsAccessed();
     }
-
-    public override IEnumerable<object> GetEqualityComponents()
+#pragma warning disable CS8618
+    public Subscription()
     {
-        yield return SubscriptionType;
-        yield return ExpirationDate;
-        yield return IsActive;
-        
     }
+#pragma warning restore CS8618
 }

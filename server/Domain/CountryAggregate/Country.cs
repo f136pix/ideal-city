@@ -7,7 +7,7 @@ namespace Domain.CountryAggregate;
 public class Country : AggregateRoot<CountryId>
 {
     private readonly List<CityAggregate.City> _cities = new();
-    private readonly List<CityId> _cityIds = new();
+    private List<CityId> _cityIds => GetCityIds();
     public string Name { get; private set; }
     public IReadOnlyList<CityAggregate.City> Cities => _cities.AsReadOnly();
     public IReadOnlyList<CityId> CityIds => _cityIds.AsReadOnly();
@@ -26,10 +26,14 @@ public class Country : AggregateRoot<CountryId>
 
         return country;
     }
-
-    public void AddCityId(CityId cityId)
+    
+    private List<CityId> GetCityIds()
     {
-        _cityIds.Add(cityId);
+        var cityIds =
+            from city in Cities
+            select city.Id;
+
+        return cityIds.ToList();
     }
 
 #pragma warning disable CS8618
