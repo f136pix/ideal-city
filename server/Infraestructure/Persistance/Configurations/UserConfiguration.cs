@@ -2,6 +2,7 @@ using Domain.City.ValueObjects;
 using Domain.CityAggregate;
 using Domain.Common;
 using Domain.User;
+using Domain.User.Entities;
 using Domain.User.ValueObject;
 using Domain.UserAggregate;
 using Microsoft.EntityFrameworkCore;
@@ -9,14 +10,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infraestructure.Persistance.Configurations;
 
-public class UserConfiguration : IEntityTypeConfiguration<User>, IEntityTypeConfiguration<Subscription>
+public class UserConfiguration : IEntityTypeConfiguration<User>, IEntityTypeConfiguration<Subscription>,
+    IEntityTypeConfiguration<Post>
 {
     public void Configure(EntityTypeBuilder<User> builder)
     {
         ConfigureUsersTable(builder);
-        ConfigurePostsTable(builder);
-        // ConfigurePostsIdsTable(builder);
-        // ConfigureUserFavouritesRelation(builder);
     }
 
     private void ConfigureUsersTable(EntityTypeBuilder<User> builder)
@@ -76,78 +75,58 @@ public class UserConfiguration : IEntityTypeConfiguration<User>, IEntityTypeConf
         //     .WithMany(s => s.Users)
         //     .HasPrincipalKey(s => s.Id)
         //     .HasForeignKey(u => u.SubscriptionId);
+        
+        builder.HasMany(u => u.Posts)
+            .WithOne(p => p.User)
+            .HasForeignKey(c => c.UserId)
+            .HasPrincipalKey(u => u.Id)
+            .OnDelete(DeleteBehavior.Cascade);
 
-
+        builder.Metadata.FindNavigation(nameof(User.Posts))!
+            .SetPropertyAccessMode(PropertyAccessMode.Field); 
+        
         // IGNORE POSTS IDS, SINCE ARE USED ONLY FOR NAVIGATION
         builder.Ignore(u => u.PostIds);
-
-        // builder.HasMany(u => u.Posts)
-        // .WithOne(p => p.User)
-        // .HasForeignKey(p => p.UserId);
     }
 
-    private void ConfigurePostsTable(EntityTypeBuilder<User> builder)
+    public void Configure(EntityTypeBuilder<Post> builder)
     {
-        // ONE USER HAS MANY POSTS
-        builder.OwnsMany(u => u.Posts, pb =>
-        {
-            pb.ToTable("Posts");
-            pb.HasKey(p => p.Id);
-            pb.WithOwner(p => p.User)
-                .HasForeignKey(p => p.UserId);
-            pb.Property(p => p.Id)
-                .HasColumnName("Id")
-                .ValueGeneratedNever()
-                .HasConversion(
-                    id => id.Value,
-                    value => PostId.Create(value));
-            pb.Property(p => p.Title)
-                .IsRequired()
-                .HasMaxLength(50);
-            pb.Property(p => p.Content)
-                .IsRequired()
-                .HasMaxLength(255);
-            pb.Property(p => p.CreatedAt)
-                .IsRequired();
-            pb.Property(p => p.UpdatedAt)
-                .IsRequired();
-            pb.Property(p => p.UserId)
-                .IsRequired()
-                .HasConversion(
-                    id => id.Value,
-                    value => UserId.Create(value));
-        });
+        ConfigurePostsTable(builder);
     }
 
-    private void ConfigurePostsIdsTable(EntityTypeBuilder<User> builder)
+    private void ConfigurePostsTable(EntityTypeBuilder<Post> builder)
     {
-        // ONE USER HAS MANY POSTS IDS
-        builder.OwnsMany(user => user.PostIds, pub =>
-        {
-            pub.ToTable("UserPostIds");
+        builder.ToTable("Posts");
 
-            pub.HasKey("Id"); // ID KEY
-
-            pub.WithOwner().HasForeignKey("UserId"); // POST ID FOREIGN KEY -> COMES FROM BASE BUILDER
-
-            pub.Property(upi => upi.Value) 
-                .HasColumnName("PostId")
-                .ValueGeneratedNever();
-        });
-
-        builder.Metadata.FindNavigation(nameof(User.PostIds))!
-            .SetPropertyAccessMode(PropertyAccessMode.Field);
+        builder.HasKey(p => p.Id);
+        builder.Property(p => p.Id)
+            .HasColumnName("Id")
+            .ValueGeneratedNever()
+            .HasConversion(
+                id => id.Value,
+                value => PostId.Create(value));
+        // builder.Property(p => p.Title)
+        //     .IsRequired()
+        //     .HasMaxLength(50);
+        // builder.Property(p => p.Content)
+        //     .IsRequired()
+        //     .HasMaxLength(255);
+        builder.Property(p => p.UserId)
+            .IsRequired()
+            .HasConversion(
+                id => id.Value,
+                value => UserId.Create(value));
     }
 
     public void Configure(EntityTypeBuilder<Subscription> builder)
     {
         ConfigureSubscriptionsTable(builder);
-        // ConfigureSubscriptionsIdsTable(builder);
     }
 
     private void ConfigureSubscriptionsTable(EntityTypeBuilder<Subscription> builder)
     {
         builder.ToTable("Subscriptions");
+
         builder.HasKey(s => s.Id);
         builder.Property(s => s.Id)
             .HasConversion(
@@ -155,15 +134,23 @@ public class UserConfiguration : IEntityTypeConfiguration<User>, IEntityTypeConf
                 value => SubscriptionId.Create(value))
             .ValueGeneratedNever();
 
+        builder.Property(s => s.SubscriptionType)
+            .HasColumnType("varchar(50)")
+            .HasConversion(s => s.Name,
+                v => SubscriptionType.FromName(v, false));
+
         builder.Property(s => s.IsActive)
             .HasColumnType("bool");
 
-        builder.Property(s => s.ExpirationDate);
-
+        builder.Property(s => s.ExpirationDate)
+            .HasColumnName("ExpirationDate");
 
         builder.HasMany(s => s.Users)
             .WithOne(u => u.Subscription)
             .HasPrincipalKey(s => s.Id)
             .HasForeignKey(u => u.SubscriptionId);
+
+        builder.Metadata.FindNavigation(nameof(Subscription.Users))!
+            .SetPropertyAccessMode(PropertyAccessMode.Field);
     }
 }

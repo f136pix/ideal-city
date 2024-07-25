@@ -1,11 +1,26 @@
 namespace Domain.Common;
 
-public abstract class Entity<TGuid> : IHasDomainEvents
+public abstract class Entity<TGuid> : IHasDomainEvents, IHasTimeStamps
     where TGuid : notnull
 {
     public TGuid Id { get; private init; }
     private readonly List<IDomainEvent> _domainEvents = new();
+
     public IReadOnlyList<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
+
+    // TimeStamps
+    public DateTime CreatedAt { get; private set; }
+    public DateTime UpdatedAt { get; private set; }
+
+    public void SetCreatedAtNow()
+    {
+        CreatedAt = DateTime.UtcNow;
+    }
+
+    public void SetUpdatedAt()
+    {
+        UpdatedAt = DateTime.UtcNow;
+    }
 
     protected Entity(TGuid id)
     {
@@ -16,7 +31,7 @@ public abstract class Entity<TGuid> : IHasDomainEvents
     {
         _domainEvents.Add(domainEvent);
     }
-    
+
     public void ClearDomainEvents()
     {
         _domainEvents.Clear();

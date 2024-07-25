@@ -102,10 +102,8 @@ public class ApiController : ControllerBase
 
         if (validator is not null)
         {
-            ValidationResult
-                validationResult =
-                    await validator.ValidateAsync(
-                        (dynamic)request); // needs being dynamic since request type changes at each runtime
+            ValidationResult validationResult = await validator
+                .ValidateAsync((dynamic)request); // needs being dynamic since request type changes at each runtime
             // ValidationResult validationResult = await validator.ValidateAsync(request);
             if (!validationResult.IsValid)
             {

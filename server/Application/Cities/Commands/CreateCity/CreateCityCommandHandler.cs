@@ -24,15 +24,11 @@ public class CreateCityCommandHandler : IRequestHandler<CreateCityCommand, Error
     public async Task<ErrorOr<City>> Handle(CreateCityCommand request, CancellationToken cancellationToken)
     {
         var country = await _countryRepository.GetByIdAsync(CountryId.Create(Guid.Parse(request.CountryId)));
-        if (country is null)
-        {
-            return Error.NotFound(description: "Country with given UUID not found");
-        }
+        if (country is null) return Error.NotFound(description: "Country with given UUID not found");
 
         // create city
         var city = City.Create(
             request.Name,
-            CountryId.Create(Guid.Parse(request.CountryId)),
             country,
             request.Indicators != null
                 ? Indicator.Create(
@@ -49,7 +45,7 @@ public class CreateCityCommandHandler : IRequestHandler<CreateCityCommand, Error
                 : null,
             null
         );
-        
+
         await _repository.AddAsync(city);
         await _uow.CommitAsync();
         return city;

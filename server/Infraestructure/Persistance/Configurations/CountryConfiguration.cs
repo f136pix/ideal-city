@@ -11,7 +11,6 @@ public class CountryConfiguration : IEntityTypeConfiguration<Country>
     {
         ConfigureCountriesTable(builder);
         ConfigureCitiesRelation(builder);
-        // ConfigureCitiesIdsRelation(builder);
     }
 
     private void ConfigureCountriesTable(EntityTypeBuilder<Country> builder)
@@ -45,21 +44,5 @@ public class CountryConfiguration : IEntityTypeConfiguration<Country>
         builder.Metadata.FindNavigation(nameof(Country.Cities))!
             .SetPropertyAccessMode(PropertyAccessMode.Field); // MODE THAT USES THE _cities AS A BACKING FIELD
     }
-
-    private void ConfigureCitiesIdsRelation(EntityTypeBuilder<Country> builder)
-    {
-        builder.OwnsMany(c => c.CityIds, cib => // DEFINING CITY ID AS AN ENTITY TYPE - HAS A TABLE 
-        {
-            cib.ToTable("CountryCitiesIds"); // TABLE THAT RELATES COUNTRY TO CITIES
-
-            cib.WithOwner().HasForeignKey("CountryId"); // COUNTRY ID FOREIGN KEY
-            cib.HasKey("Id");
-            cib.Property(ci => ci.Value)
-                .HasColumnName("CityId")
-                .ValueGeneratedNever();
-        });
-
-        builder.Metadata.FindNavigation(nameof(Country.CityIds))!
-            .SetPropertyAccessMode(PropertyAccessMode.Field); // MODE THAT USES THE _cityIds AS A BACKING FIELD
-    }
+   
 }

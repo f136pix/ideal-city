@@ -1,6 +1,6 @@
 namespace Domain.User.ValueObject;
 
-public class PostId : Common.ValueObject
+public sealed class PostId : Common.ValueObject
 {
     public Guid Value { get; }
 

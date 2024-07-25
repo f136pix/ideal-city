@@ -28,8 +28,8 @@ public class CityCreatedHandler : INotificationHandler<CityCreated>
     public async Task Handle(CityCreated notification, CancellationToken cancellationToken)
     {
         // AddCityToCountryCommand command = _mapper.Map<AddCityToCountryCommand>(notification);
-        AddCityToCountryCommand command = new AddCityToCountryCommand(notification.City);
+        // AddCityToCountryCommand command = new AddCityToCountryCommand(notification.City);
        
-        var res = await _service.ValidateAndExecute(_addCityToCountryCommandValidator, command);
+        // var res = await _service.ValidateAndExecute(_addCityToCountryCommandValidator, command);
     }
 }

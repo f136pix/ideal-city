@@ -12,15 +12,15 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infraestructure.Migrations
 {
     [DbContext(typeof(IdealCityDbContext))]
-    [Migration("20240718212256_ConfgiguringIds2")]
-    partial class ConfgiguringIds2
+    [Migration("20240724013311_InitialCreate3")]
+    partial class InitialCreate3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.0")
+                .HasAnnotation("ProductVersion", "7.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -61,16 +61,52 @@ namespace Infraestructure.Migrations
                     b.ToTable("Countries", (string)null);
                 });
 
+            modelBuilder.Entity("Domain.User.Entities.Post", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid")
+                        .HasColumnName("Id");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Posts", (string)null);
+                });
+
             modelBuilder.Entity("Domain.User.ValueObject.Subscription", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("ExpirationDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("ExpirationDate");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bool");
+
+                    b.Property<string>("SubscriptionType")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
 
                     b.HasKey("Id");
 
@@ -87,7 +123,7 @@ namespace Infraestructure.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)");
 
-                    b.Property<Guid>("CityId")
+                    b.Property<Guid?>("CityId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Email")
@@ -155,10 +191,8 @@ namespace Infraestructure.Migrations
                                 .HasColumnName("Id");
 
                             b1.Property<Guid>("CityId")
-                                .HasColumnType("uuid");
-
-                            b1.Property<Guid>("CityId1")
-                                .HasColumnType("uuid");
+                                .HasColumnType("uuid")
+                                .HasColumnName("CityId");
 
                             b1.Property<int>("Rating")
                                 .HasColumnType("int");
@@ -172,18 +206,10 @@ namespace Infraestructure.Migrations
 
                             b1.HasIndex("CityId");
 
-                            b1.HasIndex("CityId1");
-
                             b1.ToTable("CityReviews", (string)null);
 
-                            b1.WithOwner()
+                            b1.WithOwner("City")
                                 .HasForeignKey("CityId");
-
-                            b1.HasOne("Domain.CityAggregate.City", "City")
-                                .WithMany()
-                                .HasForeignKey("CityId1")
-                                .OnDelete(DeleteBehavior.Cascade)
-                                .IsRequired();
 
                             b1.Navigation("City");
                         });
@@ -250,13 +276,23 @@ namespace Infraestructure.Migrations
                     b.Navigation("Weather");
                 });
 
+            modelBuilder.Entity("Domain.User.Entities.Post", b =>
+                {
+                    b.HasOne("Domain.UserAggregate.User", "User")
+                        .WithMany("Posts")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Domain.UserAggregate.User", b =>
                 {
                     b.HasOne("Domain.CityAggregate.City", "City")
                         .WithMany("Users")
                         .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Domain.User.ValueObject.Subscription", "Subscription")
                         .WithMany("Users")
@@ -264,49 +300,7 @@ namespace Infraestructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsMany("Domain.User.Entities.Post", "Posts", b1 =>
-                        {
-                            b1.Property<Guid>("Id")
-                                .HasColumnType("uuid")
-                                .HasColumnName("Id");
-
-                            b1.Property<string>("Content")
-                                .IsRequired()
-                                .HasMaxLength(255)
-                                .HasColumnType("character varying(255)");
-
-                            b1.Property<DateTime>("CreatedAt")
-                                .HasColumnType("timestamp with time zone");
-
-                            b1.Property<string>("Image")
-                                .HasColumnType("text");
-
-                            b1.Property<string>("Title")
-                                .IsRequired()
-                                .HasMaxLength(50)
-                                .HasColumnType("character varying(50)");
-
-                            b1.Property<DateTime>("UpdatedAt")
-                                .HasColumnType("timestamp with time zone");
-
-                            b1.Property<Guid>("UserId")
-                                .HasColumnType("uuid");
-
-                            b1.HasKey("Id");
-
-                            b1.HasIndex("UserId");
-
-                            b1.ToTable("Posts", (string)null);
-
-                            b1.WithOwner("User")
-                                .HasForeignKey("UserId");
-
-                            b1.Navigation("User");
-                        });
-
                     b.Navigation("City");
-
-                    b.Navigation("Posts");
 
                     b.Navigation("Subscription");
                 });
@@ -324,6 +318,11 @@ namespace Infraestructure.Migrations
             modelBuilder.Entity("Domain.User.ValueObject.Subscription", b =>
                 {
                     b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("Domain.UserAggregate.User", b =>
+                {
+                    b.Navigation("Posts");
                 });
 #pragma warning restore 612, 618
         }

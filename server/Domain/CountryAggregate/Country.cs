@@ -16,7 +16,6 @@ public class Country : AggregateRoot<CountryId>
     {
         Name = name;
     }
-
     public static Country Create(string name)
     {
         var country = new Country(CountryId.CreateUnique(), name);

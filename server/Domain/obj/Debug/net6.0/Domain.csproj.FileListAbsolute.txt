@@ -10,3 +10,5 @@
 /home/filipe/Desktop/Projects/ideal-city/server/Domain/obj/Debug/net6.0/Domain.dll
 /home/filipe/Desktop/Projects/ideal-city/server/Domain/obj/Debug/net6.0/ref/Domain.dll
 /home/filipe/Desktop/Projects/ideal-city/server/Domain/obj/Debug/net6.0/Domain.pdb
+/home/filipe/Desktop/Projects/ideal-city/server/Domain/bin/Debug/net6.0/Domain.runtimeconfig.json
+/home/filipe/Desktop/Projects/ideal-city/server/Domain/obj/Debug/net6.0/Domain.genruntimeconfig.cache

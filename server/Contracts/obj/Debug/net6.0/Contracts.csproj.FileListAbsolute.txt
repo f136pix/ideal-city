@@ -10,3 +10,8 @@
 /home/filipe/Desktop/Projects/ideal-city/server/Contracts/obj/Debug/net6.0/Contracts.dll
 /home/filipe/Desktop/Projects/ideal-city/server/Contracts/obj/Debug/net6.0/ref/Contracts.dll
 /home/filipe/Desktop/Projects/ideal-city/server/Contracts/obj/Debug/net6.0/Contracts.pdb
+/home/filipe/Desktop/Projects/ideal-city/server/Contracts/bin/Debug/net6.0/Domain.dll
+/home/filipe/Desktop/Projects/ideal-city/server/Contracts/bin/Debug/net6.0/Domain.pdb
+/home/filipe/Desktop/Projects/ideal-city/server/Contracts/obj/Debug/net6.0/Contracts.csproj.CopyComplete
+/home/filipe/Desktop/Projects/ideal-city/server/Contracts/bin/Debug/net6.0/Contracts.runtimeconfig.json
+/home/filipe/Desktop/Projects/ideal-city/server/Contracts/obj/Debug/net6.0/Contracts.genruntimeconfig.cache

@@ -13,7 +13,6 @@ public class CityConfigurations : IEntityTypeConfiguration<City>
     {
         ConfigureCitiesTable(builder);
         ConfigureCityReviewsTable(builder);
-        // ConfigureCityReviewsIdsTable(builder);
         ConfigureCityFavouritesRelation(builder);
     }
 
@@ -122,25 +121,6 @@ public class CityConfigurations : IEntityTypeConfiguration<City>
 
         builder.Metadata.FindNavigation(nameof(City.Reviews))!
             .SetPropertyAccessMode(PropertyAccessMode.Field); // MODE THAT USES THE _reviews AS A BACKING FIELD
-    }
-
-    private void ConfigureCityReviewsIdsTable(EntityTypeBuilder<City> builder)
-    {
-        builder.OwnsMany(c => c.ReviewsIds, cib =>
-        {
-            cib.ToTable("CityReviewIds");
-
-            cib.HasKey("Id"); // ID KEY
-
-            cib.WithOwner().HasForeignKey("CityId"); // CITY ID FOREIGN KEY -> COMES FROM BASE BUILDER
-
-            cib.Property(cri => cri.Value) // CITY REVIEW ID FOREIGN KEY 
-                .HasColumnName("ReviewId")
-                .ValueGeneratedNever();
-        });
-
-        builder.Metadata.FindNavigation(nameof(City.ReviewsIds))!
-            .SetPropertyAccessMode(PropertyAccessMode.Field); // MODE THAT USES THE _reviewsIds AS A BACKING FIELD
     }
 
     private void ConfigureCityFavouritesRelation(EntityTypeBuilder<City> builder)

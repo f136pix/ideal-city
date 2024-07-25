@@ -7,11 +7,11 @@ namespace Infraestructure.Persistance.Repositories;
 
 public class UserRepository : IUserRepository
 {
-    private readonly IdealCityDbContext _dbContext;
+    private readonly IdealCityDbContext _context;
 
-    public UserRepository(IdealCityDbContext dbContext)
+    public UserRepository(IdealCityDbContext context)
     {
-        _dbContext = dbContext;
+        _context = context;
     }
 
     public Task<IReadOnlyList<User>> GetAllAsync()
@@ -19,17 +19,19 @@ public class UserRepository : IUserRepository
         throw new NotImplementedException();
     }
 
-    public Task<User> AddAsync(User entity)
+    public async Task<User> AddAsync(User entity)
     {
-        throw new NotImplementedException();
+        var user = await _context.Users.AddAsync(entity);
+        return user.Entity;
     }
 
     public Task<User> UpdateAsync(User entity)
     {
-        throw new NotImplementedException();
+        _context.Users.Update(entity);
+        return Task.FromResult(entity);
     }
 
-    public Task<User> GetByIdAsync(User id)
+    public Task<User> GetByIdAsync(UserId id)
     {
         throw new NotImplementedException();
     }
@@ -46,15 +48,14 @@ public class UserRepository : IUserRepository
 
     public Task<User> GetByProperty(string propertyName, string value)
     {
-        throw new NotImplementedException();
-        // switch (propertyName)
-        // {
-        //     case "Email":
-        //         return _dbContext.Users
-        //             .FirstOrDefaultAsync(u => u.Email == value);
-        //
-        //     default:
-        //         throw new ArgumentException("Invalid property name");
-        // }
+        switch (propertyName)
+        {
+            case "Email":
+                return _context.Users
+                    .FirstOrDefaultAsync(u => u.Email == value);
+
+            default:
+                throw new ArgumentException("Invalid property name");
+        }
     }
 }

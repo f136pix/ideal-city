@@ -43,6 +43,7 @@ public static class DependencyInjection
 
     public static IServiceCollection AddRepositories(this IServiceCollection services)
     {
+        services.AddScoped<ISubscriptionRepository, SubscriptionRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<ICityRepository, CityRepository>();
         services.AddScoped<ICountryRepository, CountryRepository>();
@@ -53,6 +54,7 @@ public static class DependencyInjection
     public static IServiceCollection AddInterceptor(this IServiceCollection services)
     {
         services.AddScoped<PublishDomainEventInterceptor>();
+        services.AddScoped<SaveTimeStampsInterceptor>();
         return services;
     }
 

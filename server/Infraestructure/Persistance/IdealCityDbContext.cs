@@ -4,6 +4,8 @@ using Domain.CityAggregate;
 using Domain.Common;
 using Domain.CountryAggregate;
 using Domain.User;
+using Domain.User.Entities;
+using Domain.User.ValueObject;
 using Domain.UserAggregate;
 using Infraestructure.Persistance.Interceptors;
 using Microsoft.EntityFrameworkCore;
@@ -14,19 +16,23 @@ namespace Infraestructure.Persistance;
 public class IdealCityDbContext : DbContext
 {
     private readonly PublishDomainEventInterceptor _publishDomainEventInterceptor;
+    private readonly SaveTimeStampsInterceptor _saveTimeStampsInterceptor;
 
     public IdealCityDbContext(DbContextOptions<IdealCityDbContext> options,
-        PublishDomainEventInterceptor publishDomainEventInterceptor) : base(options)
+        PublishDomainEventInterceptor publishDomainEventInterceptor,
+        SaveTimeStampsInterceptor saveTimeStampsInterceptor) : base(options)
     {
         _publishDomainEventInterceptor = publishDomainEventInterceptor;
+        _saveTimeStampsInterceptor = saveTimeStampsInterceptor;
     }
 
 
+    public DbSet<Subscription> Subscriptions { get; set; } = null!;
     public DbSet<Country> Countries { get; set; } = null!;
     public DbSet<City> Cities { get; set; } = null!;
     public DbSet<CityReview> CityReviews { get; set; } = null!;
-    // public DbSet<User> Users { get; set; } = null!;
-
+    public DbSet<User> Users { get; set; } = null!;
+    public DbSet<Post> Posts { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -46,6 +52,7 @@ public class IdealCityDbContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.AddInterceptors(_publishDomainEventInterceptor);
+        optionsBuilder.AddInterceptors(_saveTimeStampsInterceptor);
         base.OnConfiguring(optionsBuilder);
     }
 }

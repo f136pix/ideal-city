@@ -39,7 +39,6 @@ public class CountryRepository : ICountryRepository
             case "Name":
                 return _dbContext.Countries
                     .Include(c => c.Cities)
-                    .Include(c => c.CityIds)
                     .FirstOrDefaultAsync(c => c.Name == value);
             default:
                 throw new ArgumentException("Invalid property name");
@@ -52,9 +51,10 @@ public class CountryRepository : ICountryRepository
         throw new NotImplementedException();
     }
 
-    public Task<Country> AddAsync(Country entity)
+    public async Task<Country> AddAsync(Country entity)
     {
-        throw new NotImplementedException();
+        var country = await _dbContext.Countries.AddAsync(entity);
+        return country.Entity;
     }
 
     public Task<Country> UpdateAsync(Country entity)

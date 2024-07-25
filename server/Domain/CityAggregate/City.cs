@@ -43,14 +43,13 @@ public sealed class City : AggregateRoot<CityId>
 
     public static City Create(
         string name,
-        CountryId countryId,
         Country country,
         Indicator? indicators,
         Weather? weather,
         List<CityReview>? reviews
     )
     {
-        var city = new City(CityId.CreateUnique(), name, countryId, country, indicators, weather, reviews);
+        var city = new City(CityId.CreateUnique(), name, country.Id, country, indicators, weather, reviews);
 
         // add domain event
         city.AddDomainEvent(new CityCreated(city));
