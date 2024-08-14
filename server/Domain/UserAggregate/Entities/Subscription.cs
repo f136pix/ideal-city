@@ -1,5 +1,6 @@
 using System.Collections.ObjectModel;
 using Domain.Common;
+using Domain.UserAggregate.Errors;
 using ErrorOr;
 
 namespace Domain.User.ValueObject;
@@ -7,12 +8,13 @@ namespace Domain.User.ValueObject;
 public class Subscription : Entity<SubscriptionId>
 {
     private readonly List<UserAggregate.User> _users = new();
-    // private readonly List<UserId> _userIds = new(); // Todo: Store user ids in DB
+    private readonly List<UserId> _userIds = new();
 
     public SubscriptionType SubscriptionType { get; private set; }
     public DateTime ExpirationDate { get; private set; }
     public bool IsActive { get; private set; } = false;
     public IReadOnlyList<UserAggregate.User> Users => _users.AsReadOnly();
+    public IReadOnlyList<UserId> UserIds => _userIds.AsReadOnly();
 
 
     private Subscription(SubscriptionId id, SubscriptionType subscriptionType, DateTime expirationDate) : base(id)
@@ -27,59 +29,66 @@ public class Subscription : Entity<SubscriptionId>
         return new Subscription(SubscriptionId.CreateUnique(), SubscriptionType.Basic, DateTime.UtcNow.AddYears(100));
     }
 
-    public ErrorOr<Success> AddUser(UserAggregate.User user)
+    public ErrorOr<Updated> AddUser(UserAggregate.User user)
     {
-        if (IsActive)
-        {
-            _users.Add(user);
-            return Result.Success;
-        }
+        if (!IsActive) return SubscriptionErrors.SubscriptionIsNotActive;
+        if (user.Id == null) return Error.Unexpected(description: "User id is null");
+        if (UserIds.Contains(user.Id)) return SubscriptionErrors.UserIsAlreadyOnSubscription;
 
-        return Error.Conflict(description: "Subscription is not active");
+        if (UserIds.Count >= SubscriptionType.GetMaxPeopleInPlan())
+            return SubscriptionErrors.CannotHaveMoreUsersThanTheSubscriptionAllows;
+
+        _users.Add(user);
+        _userIds.Add(user.Id);
+        return Result.Updated;
     }
 
+    public ErrorOr<Updated> RemoveUser(UserAggregate.User user)
+    {
+        if (user.Id == null) return Error.Unexpected(description: "User id is null");
+        if (!UserIds.Contains(user.Id)) return SubscriptionErrors.UserIsNotOnSubscription;
+
+        _users.Remove(user);
+        _userIds.Remove(user.Id);
+        return Result.Updated;
+    }
 
     public static ErrorOr<Subscription> Create(SubscriptionType subscriptionType)
     {
+        var SubscriptionDuration = subscriptionType.GetSubscriptionDuration(subscriptionType);
+
         switch (subscriptionType.Name)
         {
             case "Premium":
                 return new Subscription(SubscriptionId.CreateUnique(), SubscriptionType.Premium,
-                    DateTime.UtcNow.AddYears(100));
+                    DateTime.UtcNow.AddYears(SubscriptionDuration));
             case "Pro":
                 return new Subscription(SubscriptionId.CreateUnique(), SubscriptionType.Pro,
-                    DateTime.UtcNow.AddYears(1));
+                    DateTime.UtcNow.AddYears(SubscriptionDuration));
             case "Basic":
                 return new Subscription(SubscriptionId.CreateUnique(), SubscriptionType.Basic,
-                    DateTime.UtcNow.AddYears(1));
+                    DateTime.UtcNow.AddYears(SubscriptionDuration));
             default:
-                return Error.Unexpected(description:"This subscription type does not exist");
+                return Error.Unexpected(description: "This subscription type does not exist");
         }
     }
 
-    public int GetMaxPostsMade() => this.SubscriptionType.Name switch
-    {
-        nameof(SubscriptionType.Basic) => 10,
-        nameof(SubscriptionType.Pro) => int.MaxValue,
-        nameof(SubscriptionType.Premium) => int.MaxValue,
-        _ => throw new InvalidOperationException(),
-    };
-
-    public int GetMaxLikes() => this.SubscriptionType.Name switch
-    {
-        nameof(SubscriptionType.Basic) => 10,
-        nameof(SubscriptionType.Pro) => int.MaxValue,
-        nameof(SubscriptionType.Premium) => int.MaxValue,
-        _ => throw new InvalidOperationException(),
-    };
-
-    public int GetMaxPeopleInPlan() => this.SubscriptionType.Name switch
-    {
-        nameof(SubscriptionType.Basic) => 1,
-        nameof(SubscriptionType.Pro) => 5,
-        nameof(SubscriptionType.Premium) => 10,
-        _ => throw new InvalidOperationException(),
-    };
+    // Todo: Move it to SubscriptionType.cs
+    // public int GetMaxPostsMade() => this.SubscriptionType.Name switch
+    // {
+    //     nameof(SubscriptionType.Basic) => 10,
+    //     nameof(SubscriptionType.Pro) => int.MaxValue,
+    //     nameof(SubscriptionType.Premium) => int.MaxValue,
+    //     _ => throw new InvalidOperationException(),
+    // };
+    //
+    // public int GetMaxLikes() => this.SubscriptionType.Name switch
+    // {
+    //     nameof(SubscriptionType.Basic) => 10,
+    //     nameof(SubscriptionType.Pro) => int.MaxValue,
+    //     nameof(SubscriptionType.Premium) => int.MaxValue,
+    //     _ => throw new InvalidOperationException(),
+    // };
 
     public void ActivateSubscription()
     {

@@ -1,4 +1,4 @@
-package f136.pix.payment_service.infra.users._common.validation;
+package f136.pix.payment_service.infra._config.validation;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;

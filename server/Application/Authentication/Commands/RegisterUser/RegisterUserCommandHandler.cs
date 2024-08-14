@@ -39,10 +39,11 @@ public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, E
 
         User newUser = User.Create(request.Name, request.Email, newSubscription.Value, null,
             request.Password, null, null);
-        string token = _tokenGenerator.GenerateToken(newUser.Id.Value, newUser.Email);
 
-        // ErrorOr<Success> addResult = newSubscription.AddUser(newUser);
-        // if (addResult.IsError) return addResult.Errors;
+        var result = newSubscription.Value.AddUser(newUser);
+        if (result.IsError) return result.Errors;
+
+        string token = _tokenGenerator.GenerateToken(newUser.Id.Value, newUser.Email);
 
         await _subscriptionRepository.AddAsync(newSubscription.Value);
         await _userRepository.AddAsync(newUser);

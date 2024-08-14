@@ -71,11 +71,11 @@ public class UserConfiguration : IEntityTypeConfiguration<User>, IEntityTypeConf
 
         // BEING DEFINED BELOW IN SUBSCRIPTIONS SESSION
         // ONE USER BELONGS TO ONE SUBSCRIPTION
-        // builder.HasOne(u => u.Subscription)
-        //     .WithMany(s => s.Users)
-        //     .HasPrincipalKey(s => s.Id)
-        //     .HasForeignKey(u => u.SubscriptionId);
-        
+        builder.HasOne(u => u.Subscription)
+            .WithMany(s => s.Users)
+            .HasPrincipalKey(s => s.Id)
+            .HasForeignKey(u => u.SubscriptionId);
+
         builder.HasMany(u => u.Posts)
             .WithOne(p => p.User)
             .HasForeignKey(c => c.UserId)
@@ -83,8 +83,8 @@ public class UserConfiguration : IEntityTypeConfiguration<User>, IEntityTypeConf
             .OnDelete(DeleteBehavior.Cascade);
 
         builder.Metadata.FindNavigation(nameof(User.Posts))!
-            .SetPropertyAccessMode(PropertyAccessMode.Field); 
-        
+            .SetPropertyAccessMode(PropertyAccessMode.Field);
+
         // IGNORE POSTS IDS, SINCE ARE USED ONLY FOR NAVIGATION
         builder.Ignore(u => u.PostIds);
     }
@@ -145,12 +145,22 @@ public class UserConfiguration : IEntityTypeConfiguration<User>, IEntityTypeConf
         builder.Property(s => s.ExpirationDate)
             .HasColumnName("ExpirationDate");
 
+        builder.Metadata.FindNavigation(nameof(Subscription.Users))!
+            .SetPropertyAccessMode(PropertyAccessMode.Field);
+
         builder.HasMany(s => s.Users)
             .WithOne(u => u.Subscription)
             .HasPrincipalKey(s => s.Id)
             .HasForeignKey(u => u.SubscriptionId);
 
-        builder.Metadata.FindNavigation(nameof(Subscription.Users))!
+        builder.Metadata.FindNavigation(nameof(Subscription.UserIds))!
             .SetPropertyAccessMode(PropertyAccessMode.Field);
+        
+          builder.Property(s => s.UserIds)
+                    .HasListOfIdsConverter();
+
+        // builder.Property<List<UserId>>("_userIds")
+        //     .HasColumnName("UserIds")
+        //     .HasListOfIdsConverter();
     }
 }

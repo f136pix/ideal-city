@@ -25,11 +25,13 @@ public class ApiController : ControllerBase
 
     public async Task<ErrorOr<T>> Invoke<T>(IRequest<ErrorOr<T>> command)
     {
-        var validationResult = await ValidateRequest(command);
-        if (validationResult is not null)
-        {
-            return validationResult;
-        }
+        
+        // Validation being made in ValidationBehavior.cs
+        // var validationResult = await ValidateRequest(command);
+        // if (validationResult is not null)
+        // {
+        //     return validationResult;
+        // }
 
         ErrorOr<T> result;
 

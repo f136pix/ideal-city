@@ -3,6 +3,7 @@ using Domain.City.ValueObjects;
 using Domain.Common;
 using Domain.User.Entities;
 using Domain.User.ValueObject;
+using Domain.UserAggregate.Events;
 using ErrorOr;
 
 namespace Domain.UserAggregate;
@@ -10,7 +11,7 @@ namespace Domain.UserAggregate;
 public sealed class User : AggregateRoot<UserId>
 {
     private readonly List<Post> _posts = new();
-    private List<PostId> _postIds => GetPostsIds();
+    private List<PostId>? _postIds => GetPostsIds();
     public string Name { get; private set; }
     public string Email { get; private set; }
     public Subscription Subscription { get; private set; }
@@ -21,7 +22,7 @@ public sealed class User : AggregateRoot<UserId>
     public string? ProfilePicture { get; private set; }
     public string? Bio { get; private set; }
     public IReadOnlyList<Post> Posts { get; private set; } // Using property access style
-    public IReadOnlyList<PostId> PostIds => _postIds.AsReadOnly();
+    public IReadOnlyList<PostId>? PostIds => _postIds.AsReadOnly();
 
 
     private User(UserId userId, string name, string email, Subscription subscription, CityAggregate.City? city,
@@ -52,7 +53,7 @@ public sealed class User : AggregateRoot<UserId>
             bio);
 
         // add domain event
-        // user.AddDomainEvent(new UserCreated(user));
+        user.AddDomainEvent(new UserCreated(user));
 
         return user;
     }
@@ -91,11 +92,32 @@ public sealed class User : AggregateRoot<UserId>
         Subscription = subscription;
         SubscriptionId = Subscription.Id;
 
+        var result = subscription.AddUser(this);
+        if (result.IsError) return result.Errors;
+
         return Result.Updated;
     }
 
-    private List<PostId> GetPostsIds()
+    public ErrorOr<Updated> LeaveSubscription()
     {
+        if (Subscription is null)
+        {
+            return Error.NotFound("User is not in a subscription");
+        }
+
+        var result = Subscription.RemoveUser(this);
+        if (result.IsError) return result.Errors;
+
+        Subscription = null;
+        SubscriptionId = null;
+
+        return Result.Updated;
+    }
+
+    private List<PostId>? GetPostsIds()
+    {
+        if (Posts == null) return new List<PostId>();
+
         // return Posts.Select(p => p.Id).ToList();
 
         var postIds =

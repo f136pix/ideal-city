@@ -1,8 +1,10 @@
 using System.Reflection.Emit;
+using Domain.Common;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infraestructure.Persistance;
 
-public class FluentApiExtensions
+public static class FluentApiExtensions
 {
     public static PropertyBuilder<T> HasListOfIdsConverter<T>(this PropertyBuilder<T> propertyBuilder)
     {

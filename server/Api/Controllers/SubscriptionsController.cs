@@ -15,7 +15,7 @@ using DomainSubscriptionType = SubscriptionType;
 [Route("/api/users/{userId:guid}/subscriptions")]
 public class SubscriptionsController : ApiController
 {
-    protected SubscriptionsController(ISender mediator, IMapper mapper) : base(mediator, mapper)
+    public SubscriptionsController(ISender mediator, IMapper mapper) : base(mediator, mapper)
     {
     }
 
@@ -33,11 +33,22 @@ public class SubscriptionsController : ApiController
 
         CreateSubscriptionCommand command = _mapper.Map<CreateSubscriptionCommand>(request);
         command.UserId = userId;
+
         ErrorOr<Subscription> result = await Invoke<Subscription>(command);
         return result.Match(
-            subscription => Ok(subscription),
+            subscription => Ok(subscription), 
             errors => Problem(errors)
         ) ?? Problem("An unexpected error occurred");
+        
+        // Todo: implement like this :
+        // return createRoomResult.Match(
+        //         room => Created(
+        //             $"rooms/{room.Id}", // todo: add host
+        //             new RoomResponse(room.Id, room.Name)),
+        //         _ => Problem());
+        // }
+
+
     }
 
     [HttpPost("{subscriptionId:guid}")]

@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace Contracts.Cities._Messaging;
+namespace Infraestructure.Common.Async.Requests;
 
 public class CreateCityQueueRequest : IQueueRequest
 {

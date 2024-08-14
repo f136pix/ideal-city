@@ -1,6 +1,6 @@
 namespace Infraestructure.Common.Async.Requests;
 
-public class IQueueRequest
+public interface IQueueRequest
 {
     
 }

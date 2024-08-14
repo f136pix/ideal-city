@@ -12,3 +12,20 @@ spec:
       nodePort: 30007
   selector:
     app: postgres-dotnet
+    
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: pgsql-np-java
+  labels:
+    app: postgres-java
+spec:
+  type: NodePort
+  ports:
+    - port: 5432
+      targetPort: 5432
+      nodePort: 30009
+  selector:
+    app: postgres-java

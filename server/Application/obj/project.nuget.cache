@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "pa5Xywf020wHDnT+MHaitS7NCEhr04TF/HvqLnOZzXOP/CP/tmenoytljvk2zxxPS2eZkvJBQuwbv0zt+y0aOA==",
+  "dgSpecHash": "XJ76GXNIb1bConDGK2uAmDL4grYDwPHSUeFt3ZdRAfVgh2wedZVemCMkQPud1O7eKchPHLcFNBbardkDwSUIXA==",
   "success": true,
   "projectFilePath": "/home/filipe/Desktop/Projects/ideal-city/server/Application/Application.csproj",
   "expectedPackageFiles": [
@@ -39,10 +39,12 @@
     "/home/filipe/.nuget/packages/mono.texttemplating/2.2.1/mono.texttemplating.2.2.1.nupkg.sha512",
     "/home/filipe/.nuget/packages/npgsql/7.0.2/npgsql.7.0.2.nupkg.sha512",
     "/home/filipe/.nuget/packages/npgsql.entityframeworkcore.postgresql/7.0.3/npgsql.entityframeworkcore.postgresql.7.0.3.nupkg.sha512",
+    "/home/filipe/.nuget/packages/rabbitmq.client/7.0.0-rc.6/rabbitmq.client.7.0.0-rc.6.nupkg.sha512",
     "/home/filipe/.nuget/packages/system.codedom/4.4.0/system.codedom.4.4.0.nupkg.sha512",
     "/home/filipe/.nuget/packages/system.componentmodel.annotations/5.0.0/system.componentmodel.annotations.5.0.0.nupkg.sha512",
     "/home/filipe/.nuget/packages/system.diagnostics.diagnosticsource/6.0.1/system.diagnostics.diagnosticsource.6.0.1.nupkg.sha512",
     "/home/filipe/.nuget/packages/system.identitymodel.tokens.jwt/8.0.0-preview1/system.identitymodel.tokens.jwt.8.0.0-preview1.nupkg.sha512",
+    "/home/filipe/.nuget/packages/system.io.pipelines/6.0.0/system.io.pipelines.6.0.0.nupkg.sha512",
     "/home/filipe/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.0/system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "/home/filipe/.nuget/packages/system.text.encodings.web/7.0.0/system.text.encodings.web.7.0.0.nupkg.sha512",
     "/home/filipe/.nuget/packages/system.text.json/7.0.0/system.text.json.7.0.0.nupkg.sha512"

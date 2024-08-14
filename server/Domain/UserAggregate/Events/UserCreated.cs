@@ -1,6 +1,5 @@
+using Domain.Common;
+
 namespace Domain.UserAggregate.Events;
 
-public class UserCreated
-{
-    
-}
+public record UserCreated(User user) : IDomainEvent;

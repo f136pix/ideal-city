@@ -40,9 +40,10 @@ public class SubscriptionRepository : ISubscriptionRepository
         throw new NotImplementedException();
     }
 
-    public Task<Subscription> DeleteAsync(SubscriptionId id)
+    public Task DeleteAsync(Subscription subscription)
     {
-        throw new NotImplementedException();
+        _context.Subscriptions.Remove(subscription);
+        return Task.CompletedTask;
     }
 
     public Task<Subscription> GetByProperty(string propertyName, string value)

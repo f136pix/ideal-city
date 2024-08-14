@@ -10,7 +10,7 @@ public class CreateSubscriptionCommandValidator : AbstractValidator<CreateSubscr
     {
         int[] paidTypes =
         {
-            SubscriptionType.Basic.Value,
+            SubscriptionType.Pro.Value,
             SubscriptionType.Premium.Value,
         };
 

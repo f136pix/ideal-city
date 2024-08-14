@@ -99,6 +99,10 @@
               "target": "Package",
               "version": "[7.0.3, )"
             },
+            "RabbitMQ.Client": {
+              "target": "Package",
+              "version": "[7.0.0-rc.6, )"
+            },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
               "version": "[8.0.0-preview1, )"
@@ -206,6 +210,10 @@
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
               "version": "[7.0.3, )"
+            },
+            "RabbitMQ.Client": {
+              "target": "Package",
+              "version": "[7.0.0-rc.6, )"
             }
           },
           "imports": [
@@ -310,6 +318,10 @@
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
               "version": "[7.0.3, )"
+            },
+            "RabbitMQ.Client": {
+              "target": "Package",
+              "version": "[7.0.0-rc.6, )"
             }
           },
           "imports": [
@@ -404,6 +416,10 @@
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
               "version": "[7.0.3, )"
+            },
+            "RabbitMQ.Client": {
+              "target": "Package",
+              "version": "[7.0.0-rc.6, )"
             }
           },
           "imports": [

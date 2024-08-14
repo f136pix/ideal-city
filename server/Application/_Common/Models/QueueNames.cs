@@ -1,6 +1,6 @@
 namespace Application._Common.Models;
 
-public class QueueNames
+public enum QueueNames
 {
-    
+    UserRegistration,
 }

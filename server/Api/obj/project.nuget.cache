@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Or0Ir5LMlTd2QLW1WwgSdRuUuxhAB5/yzRBIyZUJzjiewWg4okIfb5QQENbf7xe9b36O0yJdarub2YdM0hpxxQ==",
+  "dgSpecHash": "3N+EK9YsZWqhqr6lxXh4P6PyqfWVVfSPlNl/RRB4it2mwO1yVc3zUm4vB/LBh1LK5owBT7ucWhxENFENut256w==",
   "success": true,
   "projectFilePath": "/home/filipe/Desktop/Projects/ideal-city/server/Api/Api.csproj",
   "expectedPackageFiles": [
@@ -41,6 +41,7 @@
     "/home/filipe/.nuget/packages/mono.texttemplating/2.2.1/mono.texttemplating.2.2.1.nupkg.sha512",
     "/home/filipe/.nuget/packages/npgsql/7.0.2/npgsql.7.0.2.nupkg.sha512",
     "/home/filipe/.nuget/packages/npgsql.entityframeworkcore.postgresql/7.0.3/npgsql.entityframeworkcore.postgresql.7.0.3.nupkg.sha512",
+    "/home/filipe/.nuget/packages/rabbitmq.client/7.0.0-rc.6/rabbitmq.client.7.0.0-rc.6.nupkg.sha512",
     "/home/filipe/.nuget/packages/swashbuckle.aspnetcore/6.5.0/swashbuckle.aspnetcore.6.5.0.nupkg.sha512",
     "/home/filipe/.nuget/packages/swashbuckle.aspnetcore.swagger/6.5.0/swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
     "/home/filipe/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.5.0/swashbuckle.aspnetcore.swaggergen.6.5.0.nupkg.sha512",
@@ -49,6 +50,7 @@
     "/home/filipe/.nuget/packages/system.componentmodel.annotations/5.0.0/system.componentmodel.annotations.5.0.0.nupkg.sha512",
     "/home/filipe/.nuget/packages/system.diagnostics.diagnosticsource/6.0.1/system.diagnostics.diagnosticsource.6.0.1.nupkg.sha512",
     "/home/filipe/.nuget/packages/system.identitymodel.tokens.jwt/8.0.0-preview1/system.identitymodel.tokens.jwt.8.0.0-preview1.nupkg.sha512",
+    "/home/filipe/.nuget/packages/system.io.pipelines/6.0.0/system.io.pipelines.6.0.0.nupkg.sha512",
     "/home/filipe/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.0/system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "/home/filipe/.nuget/packages/system.text.encodings.web/7.0.0/system.text.encodings.web.7.0.0.nupkg.sha512",
     "/home/filipe/.nuget/packages/system.text.json/7.0.0/system.text.json.7.0.0.nupkg.sha512"

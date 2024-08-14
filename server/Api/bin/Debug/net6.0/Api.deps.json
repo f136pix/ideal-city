@@ -22,6 +22,7 @@
           "Microsoft.EntityFrameworkCore": "7.0.3",
           "Microsoft.EntityFrameworkCore.Design": "7.0.0",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "7.0.3",
+          "RabbitMQ.Client": "7.0.0-rc.6",
           "Swashbuckle.AspNetCore": "6.5.0"
         },
         "runtime": {
@@ -412,6 +413,17 @@
           }
         }
       },
+      "RabbitMQ.Client/7.0.0-rc.6": {
+        "dependencies": {
+          "System.IO.Pipelines": "6.0.0"
+        },
+        "runtime": {
+          "lib/net6.0/RabbitMQ.Client.dll": {
+            "assemblyVersion": "7.0.0.0",
+            "fileVersion": "7.0.0.0"
+          }
+        }
+      },
       "Swashbuckle.AspNetCore/6.5.0": {
         "dependencies": {
           "Microsoft.Extensions.ApiDescription.Server": "6.0.5",
@@ -482,6 +494,7 @@
           }
         }
       },
+      "System.IO.Pipelines/6.0.0": {},
       "System.Runtime.CompilerServices.Unsafe/6.0.0": {},
       "System.Text.Encodings.Web/7.0.0": {
         "dependencies": {
@@ -530,6 +543,7 @@
           "Microsoft.EntityFrameworkCore": "7.0.3",
           "Microsoft.Identity.Client": "4.61.3",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "7.0.3",
+          "RabbitMQ.Client": "7.0.0-rc.6",
           "System.IdentityModel.Tokens.Jwt": "8.0.0-preview1"
         },
         "runtime": {
@@ -548,7 +562,8 @@
           "MediatR.Contracts": "2.0.1",
           "MediatR.Extensions.Microsoft.DependencyInjection": "11.1.0",
           "Microsoft.EntityFrameworkCore": "7.0.3",
-          "Npgsql.EntityFrameworkCore.PostgreSQL": "7.0.3"
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "7.0.3",
+          "RabbitMQ.Client": "7.0.0-rc.6"
         },
         "runtime": {
           "Contracts.dll": {}
@@ -566,7 +581,8 @@
           "MediatR.Contracts": "2.0.1",
           "MediatR.Extensions.Microsoft.DependencyInjection": "11.1.0",
           "Microsoft.EntityFrameworkCore": "7.0.3",
-          "Npgsql.EntityFrameworkCore.PostgreSQL": "7.0.3"
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "7.0.3",
+          "RabbitMQ.Client": "7.0.0-rc.6"
         },
         "runtime": {
           "Domain.dll": {}
@@ -583,7 +599,8 @@
           "MediatR": "12.3.0",
           "MediatR.Contracts": "2.0.1",
           "MediatR.Extensions.Microsoft.DependencyInjection": "11.1.0",
-          "Npgsql.EntityFrameworkCore.PostgreSQL": "7.0.3"
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "7.0.3",
+          "RabbitMQ.Client": "7.0.0-rc.6"
         },
         "runtime": {
           "Infraestructure.dll": {}
@@ -856,6 +873,13 @@
       "path": "npgsql.entityframeworkcore.postgresql/7.0.3",
       "hashPath": "npgsql.entityframeworkcore.postgresql.7.0.3.nupkg.sha512"
     },
+    "RabbitMQ.Client/7.0.0-rc.6": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-+ZBGBlYVz5mh1/dBNUXR8yTBjRIhnawV+tSJWjtcT0bOWFRWFnL10o0MMleNxT2zogL3krfyW3TLdUnnRv4y4g==",
+      "path": "rabbitmq.client/7.0.0-rc.6",
+      "hashPath": "rabbitmq.client.7.0.0-rc.6.nupkg.sha512"
+    },
     "Swashbuckle.AspNetCore/6.5.0": {
       "type": "package",
       "serviceable": true,
@@ -911,6 +935,13 @@
       "sha512": "sha512-RMztys6VUi0MwShzwXnFn2+JItl6Qy3P/teY6k2bqs5YmKAtbj+ORSAa8Z7x8QeGgVfpReM1NgsEkYE7+k3G9A==",
       "path": "system.identitymodel.tokens.jwt/8.0.0-preview1",
       "hashPath": "system.identitymodel.tokens.jwt.8.0.0-preview1.nupkg.sha512"
+    },
+    "System.IO.Pipelines/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-mXX66shZ4xLlI3vNLaJ0lt8OIZdmXTvIqXRdQX5HLVGSkLhINLsVhyZuX2UdRFnOGkqnwmMUs40pIIQ7mna4+A==",
+      "path": "system.io.pipelines/6.0.0",
+      "hashPath": "system.io.pipelines.6.0.0.nupkg.sha512"
     },
     "System.Runtime.CompilerServices.Unsafe/6.0.0": {
       "type": "package",

@@ -1,0 +1,62 @@
+#pgsql deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pgsql-java 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres-java
+  template:
+    metadata:
+      labels:
+        app: postgres-java
+    spec:
+      containers:
+        - name: postgres-java
+          image: 'postgres:14'
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              value: admin
+            - name: POSTGRES_PASSWORD
+              value: paS5w0rD!
+            - name: POSTGRES_DB
+              value: payment
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: pgsqldb
+      volumes:
+        - name: pgsqldb
+          persistentVolumeClaim:
+            claimName: postgresql-volume-claim-java
+---
+# ClusterIp
+apiVersion: v1
+kind: Service
+metadata:
+  name: pgsql-java-srv
+spec:
+  type: ClusterIP
+  selector:
+    app: postgres-java
+  ports:
+    - name: postgres-java
+      protocol: TCP
+      targetPort: 5432
+      port: 5432
+---
+# PersistentVolumeClaim
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgresql-volume-claim-java
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi

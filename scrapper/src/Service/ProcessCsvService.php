@@ -45,6 +45,6 @@ class ProcessCsvService
        $json_message = json_encode($city);
         
 //        $this->asyncQueue->publishMessage(json_encode($city), 'city.create');
-        $this->asyncQueue->publishMessage($json_message, 'city.create');
+        $this->asyncQueue->publishMessage($json_message, 'city.created');
     }
 }

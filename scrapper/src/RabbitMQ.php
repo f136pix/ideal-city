@@ -20,7 +20,7 @@ class RabbitMQ
         $this->channel = $connection->channel();
 
         $this->channel->exchange_declare(RABBITMQ_DEFAULT_EXCHANGE, "direct", false, true, false);
-        $this->channel->queue_bind(RABBITMQ_QUEUE, RABBITMQ_DEFAULT_EXCHANGE, "city.create");
+        $this->channel->queue_bind(RABBITMQ_QUEUE, RABBITMQ_DEFAULT_EXCHANGE, "city.created");
         $this->channel->queue_declare(RABBITMQ_QUEUE, false, false, false, false);
     }
 

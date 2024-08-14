@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "XkGd1uJLHgHjrtOZoufOLoqRiFlDvViaK01RRqYXwfai2tv0x5VLSn8QGxEZL7pZ+KUFKOrU6m4TuzwOpbavdg==",
+  "dgSpecHash": "iAuwKzVlqayzLptTRMmH5dPrqBURmPOaIaV9UAEyaIe8FyGQSVGStzA3PtTVXTRNIUwfxjhHGH93OrrEmvhZag==",
   "success": true,
   "projectFilePath": "/home/filipe/Desktop/Projects/ideal-city/server/Infraestructure/Infraestructure.csproj",
   "expectedPackageFiles": [
@@ -35,9 +35,11 @@
     "/home/filipe/.nuget/packages/microsoft.identitymodel.tokens/8.0.0-preview1/microsoft.identitymodel.tokens.8.0.0-preview1.nupkg.sha512",
     "/home/filipe/.nuget/packages/npgsql/7.0.2/npgsql.7.0.2.nupkg.sha512",
     "/home/filipe/.nuget/packages/npgsql.entityframeworkcore.postgresql/7.0.3/npgsql.entityframeworkcore.postgresql.7.0.3.nupkg.sha512",
+    "/home/filipe/.nuget/packages/rabbitmq.client/7.0.0-rc.6/rabbitmq.client.7.0.0-rc.6.nupkg.sha512",
     "/home/filipe/.nuget/packages/system.componentmodel.annotations/5.0.0/system.componentmodel.annotations.5.0.0.nupkg.sha512",
     "/home/filipe/.nuget/packages/system.diagnostics.diagnosticsource/6.0.1/system.diagnostics.diagnosticsource.6.0.1.nupkg.sha512",
     "/home/filipe/.nuget/packages/system.identitymodel.tokens.jwt/8.0.0-preview1/system.identitymodel.tokens.jwt.8.0.0-preview1.nupkg.sha512",
+    "/home/filipe/.nuget/packages/system.io.pipelines/6.0.0/system.io.pipelines.6.0.0.nupkg.sha512",
     "/home/filipe/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.0/system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
   ],
   "logs": [

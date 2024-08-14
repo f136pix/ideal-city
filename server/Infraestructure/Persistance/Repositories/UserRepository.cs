@@ -33,7 +33,10 @@ public class UserRepository : IUserRepository
 
     public Task<User> GetByIdAsync(UserId id)
     {
-        throw new NotImplementedException();
+        return _context.Users
+            .Include(u => u.Subscription)
+            .FirstOrDefaultAsync(u => u.Id == id);
+
     }
 
     public User GetByIdSync(UserId id)

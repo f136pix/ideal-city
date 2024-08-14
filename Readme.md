@@ -44,7 +44,6 @@ public abstract class Entity<TGuid> : IHasDomainEvents, IHasTimeStamps
 > The format may vary according to which DB you are using. For instance, PostgreSQL (PGSQL) must be UTC.
 
 And then, you can have a Interceptor that provides an operation like this
-> Full implementation in *Infrastructure/Interceptors/SaveTimeStampInterceptor.cs*
 
 ````csharp
 private Task SaveTimeStamps(DbContext? dbContext)
@@ -73,15 +72,17 @@ private Task SaveTimeStamps(DbContext? dbContext)
     }
 ````
 
+> Full implementation in *Infrastructure/Interceptors/SaveTimeStampInterceptor.cs*
+
 ### Rich domain Model
 
-It`s usually easier to control the flow of your application having a rich domain model instad of anemic ones.
+It`s usually easier to control the flow of your application having a rich domain model instead of anemic ones.
 
 ### Validation Types
 
 ### Keeping track of Ids
 
-You can keep track of the many belonging Ids of a entity either by retrieving them the from the target entity when
+You can keep track of the many belonging Ids of an entity either by retrieving them the from the target entity when
 requested:
 
 ```csharp
@@ -103,13 +104,13 @@ requested:
     }
 ```
 
-This method does not require aditional configuration on the Ef Configuration.
-
 ````csharp
 // CityConfiguration.cs
     builder.Ignore(c => c.ReviewsIds);
     // # you may also need defining HasConversion for the CityReviewId on its own configuration
 ````
+
+> This method does not require aditional configuration on the Ef Configuration.
 
 Or you can have a field/column that formats and saves them in the database in a single string.
 
@@ -144,5 +145,78 @@ Or you can have a field/column that formats and saves them in the database in a 
 > If your application heavily relies on this Ids, the second approach might be more efficient, since it does
 > not lazy loads the Ids and does all the retrieving in one go.
 
+### Add Fleunt Validation to MediatR pipeline behavior
 
+You can add FluentValidation to the MediatR pipeline by creating a behavior that validates the request before they are
+threated by its handler.
+
+```csharp
+// CreateCityCommandValidator.cs
+public sealed class CreateCityCommandValidator : AbstractValidator<CreateCityCommand>
+{
+    public CreateCityCommandValidator()
+    {
+        RuleFor(x => x.Name)
+            .NotEmpty().WithMessage("Name is required")
+            .Must(name => name != null).WithMessage("Name must be a string");
+
+        RuleFor(x => x.CountryId)
+            .NotEmpty().WithMessage("Country Id is required")
+            .Matches(@"^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$")
+            .WithMessage("Country Id should contain 32 digits with 4 dashes (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)");
+    }
+}
+```
+
+You can have a pipeline behavior that interacts with IRequests :
+
+```csharp
+// ValidationBehavior.cs
+    
+public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+    where TRequest : IRequest<TResponse>
+
+    ...
+    
+    public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next,
+        CancellationToken cancellationToken)
+    {
+        var validatorType = typeof(IValidator<>).MakeGenericType(typeof(TRequest)); 
+        var _validator = _serviceProvider.GetService(validatorType) as IValidator<TRequest>; // Get the validator from the dependency services container
+
+        
+        if (_validator is null)
+        {
+            Console.WriteLine($"No validator found for {typeof(TRequest)}");
+            return await next();
+        }
+        
+        var validationResult = await _validator.ValidateAsync(request, cancellationToken);
+        if (validationResult.IsValid)
+        {
+            return await next();
+        }
+
+        List<Error> errors = validationResult
+            .Errors
+            .Select(error => Error.Validation(description: error.ErrorMessage, code: error.PropertyName))
+            .ToList();
+
+        return (dynamic)errors;
+    }
+```
+
+> Full implementation in *Application/Common/Behaviors/ValidationBehavior.cs*
+
+And add it to the services container with MediatR
+
+```csharp
+ services.AddMediatR(options =>
+        {
+            options.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly);
+            options.AddOpenBehavior(typeof(ValidationBehavior<,>));
+            
+            // options.AddBehavior<IPipelineBehavior<CreateCityCommand, ErrorOr<City>>, CreateCityCommandBehavior>();
+        }); 
+```
 
