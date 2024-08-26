@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "iAuwKzVlqayzLptTRMmH5dPrqBURmPOaIaV9UAEyaIe8FyGQSVGStzA3PtTVXTRNIUwfxjhHGH93OrrEmvhZag==",
+  "dgSpecHash": "xTS5y9wv3sO898/8Xmo8nG8mXvQQ2p0f/RmIcXe+sB3ByORiz0/vHuyXavf+FM470C2Tzqnn4xewphK3a/ufhg==",
   "success": true,
   "projectFilePath": "/home/filipe/Desktop/Projects/ideal-city/server/Infraestructure/Infraestructure.csproj",
   "expectedPackageFiles": [
@@ -15,6 +15,7 @@
     "/home/filipe/.nuget/packages/mediatr/12.3.0/mediatr.12.3.0.nupkg.sha512",
     "/home/filipe/.nuget/packages/mediatr.contracts/2.0.1/mediatr.contracts.2.0.1.nupkg.sha512",
     "/home/filipe/.nuget/packages/mediatr.extensions.microsoft.dependencyinjection/11.1.0/mediatr.extensions.microsoft.dependencyinjection.11.1.0.nupkg.sha512",
+    "/home/filipe/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/6.0.0/microsoft.aspnetcore.authentication.jwtbearer.6.0.0.nupkg.sha512",
     "/home/filipe/.nuget/packages/microsoft.entityframeworkcore/7.0.3/microsoft.entityframeworkcore.7.0.3.nupkg.sha512",
     "/home/filipe/.nuget/packages/microsoft.entityframeworkcore.abstractions/7.0.3/microsoft.entityframeworkcore.abstractions.7.0.3.nupkg.sha512",
     "/home/filipe/.nuget/packages/microsoft.entityframeworkcore.analyzers/7.0.3/microsoft.entityframeworkcore.analyzers.7.0.3.nupkg.sha512",
@@ -32,6 +33,8 @@
     "/home/filipe/.nuget/packages/microsoft.identitymodel.abstractions/8.0.0-preview1/microsoft.identitymodel.abstractions.8.0.0-preview1.nupkg.sha512",
     "/home/filipe/.nuget/packages/microsoft.identitymodel.jsonwebtokens/8.0.0-preview1/microsoft.identitymodel.jsonwebtokens.8.0.0-preview1.nupkg.sha512",
     "/home/filipe/.nuget/packages/microsoft.identitymodel.logging/8.0.0-preview1/microsoft.identitymodel.logging.8.0.0-preview1.nupkg.sha512",
+    "/home/filipe/.nuget/packages/microsoft.identitymodel.protocols/6.10.0/microsoft.identitymodel.protocols.6.10.0.nupkg.sha512",
+    "/home/filipe/.nuget/packages/microsoft.identitymodel.protocols.openidconnect/6.10.0/microsoft.identitymodel.protocols.openidconnect.6.10.0.nupkg.sha512",
     "/home/filipe/.nuget/packages/microsoft.identitymodel.tokens/8.0.0-preview1/microsoft.identitymodel.tokens.8.0.0-preview1.nupkg.sha512",
     "/home/filipe/.nuget/packages/npgsql/7.0.2/npgsql.7.0.2.nupkg.sha512",
     "/home/filipe/.nuget/packages/npgsql.entityframeworkcore.postgresql/7.0.3/npgsql.entityframeworkcore.postgresql.7.0.3.nupkg.sha512",

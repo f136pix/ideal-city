@@ -74,3 +74,6 @@
 /home/filipe/Desktop/Projects/ideal-city/server/Api/bin/Debug/net6.0/System.Diagnostics.DiagnosticSource.dll
 /home/filipe/Desktop/Projects/ideal-city/server/Api/bin/Debug/net6.0/System.IdentityModel.Tokens.Jwt.dll
 /home/filipe/Desktop/Projects/ideal-city/server/Api/bin/Debug/net6.0/RabbitMQ.Client.dll
+/home/filipe/Desktop/Projects/ideal-city/server/Api/bin/Debug/net6.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/home/filipe/Desktop/Projects/ideal-city/server/Api/bin/Debug/net6.0/Microsoft.IdentityModel.Protocols.dll
+/home/filipe/Desktop/Projects/ideal-city/server/Api/bin/Debug/net6.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll

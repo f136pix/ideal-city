@@ -5,6 +5,7 @@ using Domain.User.ValueObject;
 using ErrorOr;
 using MapsterMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
@@ -20,6 +21,7 @@ public class SubscriptionsController : ApiController
     }
 
     [HttpPost]
+    [Authorize]
     public async Task<IActionResult> CreateSubscription(Guid? userId, CreateSubscriptionRequest? request)
     {
         if (!DomainSubscriptionType.TryFromName(
@@ -39,16 +41,6 @@ public class SubscriptionsController : ApiController
             subscription => Ok(subscription), 
             errors => Problem(errors)
         ) ?? Problem("An unexpected error occurred");
-        
-        // Todo: implement like this :
-        // return createRoomResult.Match(
-        //         room => Created(
-        //             $"rooms/{room.Id}", // todo: add host
-        //             new RoomResponse(room.Id, room.Name)),
-        //         _ => Problem());
-        // }
-
-
     }
 
     [HttpPost("{subscriptionId:guid}")]

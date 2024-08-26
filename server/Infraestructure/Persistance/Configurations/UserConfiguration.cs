@@ -40,8 +40,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User>, IEntityTypeConf
             .HasMaxLength(50);
 
         builder.Property(u => u.Password)
-            .IsRequired()
-            .HasMaxLength(50);
+            .IsRequired();
 
         builder.Property(u => u.ProfilePicture)
             .HasMaxLength(255);

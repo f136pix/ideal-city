@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using Domain._Common.Interfaces;
 using Domain.City.ValueObjects;
 using Domain.Common;
 using Domain.User.Entities;
@@ -126,7 +127,12 @@ public sealed class User : AggregateRoot<UserId>
 
         return postIds.ToList();
     }
-
+    
+    public bool IsCorrectPasswordHash(string password, IPasswordHasher passwordHasher)
+    {
+        return passwordHasher.IsCorrectPassword(password, Password);
+    }
+    
 #pragma warning disable CS8618
 
     public User()

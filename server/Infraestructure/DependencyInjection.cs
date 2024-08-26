@@ -1,10 +1,13 @@
+using System.Text;
 using System.Text.Json.Serialization;
 using Application._Common.Interfaces;
 using Application._Common.Interfaces.Authentication;
 using Application._Common.Services.Authentication;
 using Contracts.Cities;
+using Domain._Common.Interfaces;
 using Domain.Cities;
 using Domain.Countries;
+using Domain.UserAggregate;
 using Infraestructure.Common;
 using Infraestructure.Common.Async;
 using Infraestructure.Common.Async.Handlers;
@@ -14,10 +17,13 @@ using Infraestructure.Persistance.Interceptors;
 using Infraestructure.Persistance.Repositories;
 using MapsterMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Infraestructure;
 
@@ -41,8 +47,11 @@ public static class DependencyInjection
 
     public static IServiceCollection AddExtensions(this IServiceCollection services)
     {
+        // CHANGED
         services.AddControllers().AddJsonOptions(x =>
             x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
+            // x.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault);
+
 
         return services;
     }
@@ -82,7 +91,24 @@ public static class DependencyInjection
     {
         services.Configure<JwtSettings>(configuration.GetSection(JwtSettings.SectionName));
         services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
-        services.AddAuthentication();
+        services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+        services.AddScoped<IPasswordHasher, PasswordHasher>();
+        services.AddAuthentication(defaultScheme: JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    // ValidateIssuerSigningKey = true,
+                    ValidIssuer = configuration["JwtSettings:Issuer"],
+                    ValidAudience = configuration["JwtSettings:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(
+                        Encoding.UTF8.GetBytes(configuration["JwtSettings:Key"]!))
+                };
+            });
+        
         return services;
     }
 
@@ -101,7 +127,7 @@ public static class DependencyInjection
         );
         return services;
     }
-    
+
     public static IServiceCollection AddRabbitMqHandlers(this IServiceCollection services)
     {
         services.AddSingleton<IHandler<CreateCityQueueRequest>, CreateCityQueueHandler>();

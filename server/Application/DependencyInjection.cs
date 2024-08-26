@@ -6,12 +6,15 @@ using Application.Cities.Commands.CreateCity;
 using Application.Counties.Commands.CreateCountry;
 using Application.Countries.Commands.AddCityToCountry;
 using Application.Countries.Commands.CreateCountry;
+using Domain._Common.Interfaces;
 using Domain.CityAggregate;
+using Domain.UserAggregate;
 using ErrorOr;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Mapster;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Application;
@@ -66,4 +69,6 @@ public static class DependencyInjection
         services.AddScoped<IApplicationService, ApplicationCommonService>();
         return services;
     }
+    
+    
 }

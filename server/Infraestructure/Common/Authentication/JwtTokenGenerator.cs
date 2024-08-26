@@ -22,11 +22,13 @@ public class JwtTokenGenerator : IJwtTokenGenerator
         {
             new Claim(JwtRegisteredClaimNames.Sub, userId.ToString()),
             new Claim(JwtRegisteredClaimNames.GivenName, name),
-            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+            new Claim("permissions", "gym:create"),
+            new Claim("permissions", "gym:update")
         };
 
         var signingCredentials = new SigningCredentials(
-            new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Secret)),
+            new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key)),
             SecurityAlgorithms.HmacSha256
         );
 

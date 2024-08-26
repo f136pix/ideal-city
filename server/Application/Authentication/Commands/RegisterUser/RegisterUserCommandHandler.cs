@@ -7,6 +7,7 @@ using Domain.User.ValueObject;
 using Domain.UserAggregate;
 using ErrorOr;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 
 namespace Application.Authentication.Commands;
 
@@ -15,15 +16,17 @@ public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, E
     private readonly IUserRepository _userRepository;
     private readonly ISubscriptionRepository _subscriptionRepository;
     private readonly IJwtTokenGenerator _tokenGenerator;
+    private readonly IPasswordHasher<User> _passwordHasher;
     private readonly IUnitOfWork _uow;
 
     public RegisterUserCommandHandler(IUserRepository userRepository, ISubscriptionRepository subscriptionRepository,
-        IJwtTokenGenerator tokenGenerator, IUnitOfWork uow)
+        IJwtTokenGenerator tokenGenerator, IUnitOfWork uow, IPasswordHasher<User> passwordHasher)
     {
         _userRepository = userRepository;
         _subscriptionRepository = subscriptionRepository;
         _tokenGenerator = tokenGenerator;
         _uow = uow;
+        _passwordHasher = passwordHasher;
         _subscriptionRepository = subscriptionRepository;
     }
 
@@ -37,8 +40,10 @@ public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, E
 
         ErrorOr<Subscription> newSubscription = Subscription.Create(SubscriptionType.Basic);
 
+        var hashPasswodResult = _passwordHasher.HashPassword(null, request.Password);
+
         User newUser = User.Create(request.Name, request.Email, newSubscription.Value, null,
-            request.Password, null, null);
+            hashPasswodResult, null, null);
 
         var result = newSubscription.Value.AddUser(newUser);
         if (result.IsError) return result.Errors;
