@@ -55,6 +55,7 @@ public class UserRepository : IUserRepository
         {
             case "Email":
                 return _context.Users
+                    .Include(u => u.Subscription)
                     .FirstOrDefaultAsync(u => u.Email == value);
 
             default:

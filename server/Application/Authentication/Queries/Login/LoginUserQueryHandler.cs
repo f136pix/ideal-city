@@ -30,13 +30,12 @@ public class LoginUserQueryHandler : IRequestHandler<LoginUserQuery, ErrorOr<Aut
         if (user is null) return Error.Unauthorized(description: "Invalid User credentials");
 
         var result = user.IsCorrectPasswordHash(request.Password, _passwordHasher);
-
         if (result is false)
         {
             return Error.Unauthorized(description: "Invalid User credentials");
         }
 
-        string token = _tokenGenerator.GenerateToken(user.Id.Value, user.Email);
+        string token = _tokenGenerator.GenerateToken(user.Id.Value, user.Email, user.Subscription);
         return new AuthenticationResult(user, token);
     }
 }

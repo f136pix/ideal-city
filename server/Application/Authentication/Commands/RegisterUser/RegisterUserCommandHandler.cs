@@ -39,6 +39,7 @@ public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, E
             return Error.Validation(description: "Email already exists");
 
         ErrorOr<Subscription> newSubscription = Subscription.Create(SubscriptionType.Basic);
+        if(newSubscription.IsError) return newSubscription.Errors;
 
         var hashPasswodResult = _passwordHasher.HashPassword(null, request.Password);
 
@@ -48,7 +49,7 @@ public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, E
         var result = newSubscription.Value.AddUser(newUser);
         if (result.IsError) return result.Errors;
 
-        string token = _tokenGenerator.GenerateToken(newUser.Id.Value, newUser.Email);
+        string token = _tokenGenerator.GenerateToken(newUser.Id.Value, newUser.Email, newSubscription.Value);
 
         await _subscriptionRepository.AddAsync(newSubscription.Value);
         await _userRepository.AddAsync(newUser);

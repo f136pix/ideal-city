@@ -11,10 +11,8 @@ public class SubscriptionType : SmartEnum<SubscriptionType>
     public static readonly SubscriptionType Basic = new(nameof(Basic), 0);
     public static readonly SubscriptionType Pro = new(nameof(Pro), 1);
     public static readonly SubscriptionType Premium = new(nameof(Premium), 2);
-    
+
     public int GetSubscriptionDuration(SubscriptionType subscriptionType) => SubscriptionDurations[subscriptionType];
-    
-    
 
     public static readonly Dictionary<SubscriptionType, int> SubscriptionDurations = new()
     {
@@ -22,7 +20,7 @@ public class SubscriptionType : SmartEnum<SubscriptionType>
         { SubscriptionType.Pro, 1 },
         { SubscriptionType.Basic, 100 }
     };
-    
+
     public int GetMaxPeopleInPlan() => this.Name switch
     {
         nameof(Basic) => 1,
@@ -31,10 +29,32 @@ public class SubscriptionType : SmartEnum<SubscriptionType>
         _ => throw new InvalidOperationException(),
     };
 
+    public static SubscriptionType GetSubscriptionFromStringValue(string value)
+    {
+        switch (value)
+        {
+            case "0":
+                return Basic;
+            case "1":
+                return Pro;
+            case "2":
+                return Premium;
+            default:
+                throw new InvalidOperationException();
+        }
+    }
+
 
 #pragma warning disable CS8618
     private SubscriptionType() : base("", 0)
     {
     }
 #pragma warning restore CS8618
+}
+
+public enum SubscriptionTypeEnum
+{
+    Basic = 0,
+    Pro = 1,
+    Premium = 2
 }

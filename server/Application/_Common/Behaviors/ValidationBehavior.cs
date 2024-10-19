@@ -7,6 +7,7 @@ namespace Application._Common.Behaviors;
 
 public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IRequest<TResponse>
+    where TResponse : IErrorOr
 {
     private readonly IServiceProvider _serviceProvider;
     private IValidator<TRequest>? _validator;

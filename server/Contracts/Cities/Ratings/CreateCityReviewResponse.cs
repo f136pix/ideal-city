@@ -1,6 +1,3 @@
 namespace Contracts.Cities.Ratings;
 
-public class CreateCityReviewResponse
-{
-    
-}
+public record CreateCityReviewResponse(Guid CityId, int Rating, string Review);

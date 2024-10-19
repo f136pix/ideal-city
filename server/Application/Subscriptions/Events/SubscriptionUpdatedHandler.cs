@@ -5,11 +5,11 @@ using MediatR;
 
 namespace Application.Subscriptions.Events;
 
-public class SubscriptionCreatedHandler : INotificationHandler<SubscriptionUpdated>
+public class SubscriptionUpdatedHandler : INotificationHandler<SubscriptionUpdated>
 {
     private readonly IAsyncBus _asyncBus;
 
-    public SubscriptionCreatedHandler(IAsyncBus asyncBus)
+    public SubscriptionUpdatedHandler(IAsyncBus asyncBus)
     {
         _asyncBus = asyncBus;
     }
@@ -20,6 +20,6 @@ public class SubscriptionCreatedHandler : INotificationHandler<SubscriptionUpdat
 
         var subscriptionCreatedMessage = PublishableDomainEvent.Create(notification);
 
-        await _asyncBus.Publish<PublishableDomainEvent>(subscriptionCreatedMessage, QueueNames.SubscriptionRegistration);
+        await _asyncBus.PublishAsync<PublishableDomainEvent>(subscriptionCreatedMessage, QueueNames.SubscriptionRegistration);
     }
 }

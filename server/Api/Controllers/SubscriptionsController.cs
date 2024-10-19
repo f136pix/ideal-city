@@ -1,12 +1,15 @@
 using Application.Subscriptions.Commands;
+using Application.Subscriptions.Commands.AddUserToSubscription;
+using Contracts.Subscriptions;
+using Contracts.Subscriptions.AddUserToSubscription;
 using Contracts.Subsriptions;
-using Domain.Common;
 using Domain.User.ValueObject;
 using ErrorOr;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SubscriptionType = Domain.Common.SubscriptionType;
 
 namespace Api.Controllers;
 
@@ -21,7 +24,7 @@ public class SubscriptionsController : ApiController
     }
 
     [HttpPost]
-    [Authorize]
+    // [Authorize]
     public async Task<IActionResult> CreateSubscription(Guid? userId, CreateSubscriptionRequest? request)
     {
         if (!DomainSubscriptionType.TryFromName(
@@ -38,20 +41,21 @@ public class SubscriptionsController : ApiController
 
         ErrorOr<Subscription> result = await Invoke<Subscription>(command);
         return result.Match(
-            subscription => Ok(subscription), 
+            subscription => Ok(_mapper.Map<CreateSubscriptionResponse>(subscription)), 
             errors => Problem(errors)
         ) ?? Problem("An unexpected error occurred");
     }
 
     [HttpPost("{subscriptionId:guid}")]
-    public async Task<IActionResult> AddUserToSubscription(Guid userId, Guid subscriptionId)
+    // [Authorize]
+    public async Task<IActionResult> AddUserToSubscription(AddUserToSubscriptionRequest request)
     {
-        throw new NotImplementedException();
-        // AddUserToSubscriptionCommand command = new AddUserToSubscriptionCommand(userId, subscriptionId);
-        // ErrorOr<Unit> result = await Invoke<Unit>(command);
-        // return result.Match(
-        //     _ => Ok(),
-        //     errors => Problem(errors)
-        // ) ?? Problem("An unexpected error occurred");
+        AddUserToSubscriptionCommand command = new AddUserToSubscriptionCommand(request.SubscriptionId);
+        
+        ErrorOr<Subscription> result = await Invoke<Subscription>(command);
+        return result.Match(
+            subscription => Ok(_mapper.Map<AddUserToSubscriptionResponse>(subscription)), 
+            errors => Problem(errors)
+        ) ?? Problem("An unexpected error occurred");
     }
 }

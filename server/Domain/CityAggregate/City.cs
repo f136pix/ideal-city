@@ -5,6 +5,7 @@ using Domain.Common;
 using Domain.Common.ValueObjects;
 using Domain.Countries;
 using Domain.CountryAggregate;
+using Mapster;
 
 namespace Domain.CityAggregate;
 
@@ -60,6 +61,11 @@ public sealed class City : AggregateRoot<CityId>
     public void SetCountry(CountryId countryId) // sets the country of a city
     {
         CountryId = countryId;
+    }
+
+    public void AddReview(CityReview cityReview)
+    {
+        _reviews.Add(cityReview);
     }
 
     private List<CityReviewId> GetReviewsIds()

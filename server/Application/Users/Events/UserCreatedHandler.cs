@@ -22,7 +22,6 @@ public class UserCreatedHandler : INotificationHandler<UserCreated>
        var userCreatedMessage = PublishableDomainEvent.Create(notification);
        
         // Publish to async bus
-        await _asyncBus.Publish<PublishableDomainEvent>(userCreatedMessage, QueueNames.UserRegistration);
-
+        await _asyncBus.PublishAsync<PublishableDomainEvent>(userCreatedMessage, QueueNames.UserRegistration);
     }
 }

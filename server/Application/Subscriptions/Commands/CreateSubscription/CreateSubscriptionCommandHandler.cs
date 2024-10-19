@@ -47,15 +47,20 @@ public class CreateSubscriptionCommandHandler : IRequestHandler<CreateSubscripti
                 user.LeaveSubscription();
                 await _subscriptionRepository.DeleteAsync(oldSubscription);
             }
-            // If user subscription type supports multiple users, delete user from it
+            // If user is in paid subscription type, let the user know he should leave it
             else
             {
-                // If user is last on subscription, delete subscription
-                bool deleteSubscription = user.Subscription.UserIds.Count <= 1;
-                var removeUserResult = user.LeaveSubscription();
-                if (removeUserResult.IsError) return removeUserResult.Errors;
-                if (deleteSubscription) await _subscriptionRepository.DeleteAsync(oldSubscription);
+                return Error.Conflict(description: "User is already in a paid subscription type");
             }
+            // If user subscription type supports multiple users, delete user from it
+            // else
+            // {
+            //     // If user is last on subscription, delete subscription
+            //     bool deleteSubscription = user.Subscription.UserIds.Count <= 1;
+            //     var removeUserResult = user.LeaveSubscription();
+            //     if (removeUserResult.IsError) return removeUserResult.Errors;
+            //     if (deleteSubscription) await _subscriptionRepository.DeleteAsync(oldSubscription);
+            // }
         }
 
         // Operations that link the user to the new created subscription

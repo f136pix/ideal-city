@@ -77,3 +77,5 @@
 /home/filipe/Desktop/Projects/ideal-city/server/Api/bin/Debug/net6.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
 /home/filipe/Desktop/Projects/ideal-city/server/Api/bin/Debug/net6.0/Microsoft.IdentityModel.Protocols.dll
 /home/filipe/Desktop/Projects/ideal-city/server/Api/bin/Debug/net6.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/home/filipe/Desktop/Projects/ideal-city/server/Api/bin/Debug/net6.0/Microsoft.AspNetCore.Authorization.dll
+/home/filipe/Desktop/Projects/ideal-city/server/Api/bin/Debug/net6.0/Microsoft.AspNetCore.Metadata.dll

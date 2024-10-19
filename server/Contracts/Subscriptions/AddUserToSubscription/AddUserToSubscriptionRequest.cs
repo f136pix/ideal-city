@@ -1,6 +1,3 @@
 namespace Contracts.Subscriptions.AddUserToSubscription;
 
-public class AddUserToSubscriptionRequest
-{
-    
-}
+public record AddUserToSubscriptionRequest(Guid SubscriptionId);

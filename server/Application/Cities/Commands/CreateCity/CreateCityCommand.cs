@@ -1,10 +1,14 @@
-using Domain.Cities;
+using Application._Common.Authorization;
 using Domain.CityAggregate;
+using Domain.Common;
 using ErrorOr;
 using MediatR;
 
 namespace Application.Cities.Commands.CreateCity;
 
+// [Authorize(Permissions = "cities:create")]
+// [Authorize(Roles = "Admin")]
+[Authorize(Subscription = SubscriptionTypeEnum.Basic)]
 public record CreateCityCommand(
     string Name,
     string CountryId,

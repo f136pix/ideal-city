@@ -1,6 +1,8 @@
 using System.Security.Claims;
 using Application._Common.Interfaces;
 using Application._Common.Models;
+using Domain.User.ValueObject;
+using ErrorOr;
 using Microsoft.IdentityModel.JsonWebTokens;
 
 namespace Api.CurrentUserProvider;
@@ -35,14 +37,25 @@ public class CurrentUserProvider : ICurrentUserProvider
         var id = GetClaimValue(JwtRegisteredClaimNames.Jti)
             .Select(v => Guid.Parse(v))
             .First();
+
+        // var permissions = GetClaimValue("permissions");
+        // var roles = GetClaimValue(ClaimTypes.Role);
         
-        var permissions = GetClaimValue("permissions");
-        var roles = GetClaimValue(ClaimTypes.Role);
+
+        var subscriptionString = GetClaimValue("subscription").First();
+
+
+        if (!int.TryParse(subscriptionString, out var subscriptionInt))
+        {
+            Console.WriteLine("USER SUBSCRIPTION IN TOKEN IS NOT A NUMBER");
+            throw new Exception("The provided token does not appear to have a valid subscription");
+        }
 
         return new CurrentUser(
             Id: id,
-            Permissions: permissions,
-            Roles: roles
+            Subscription: subscriptionInt
+            // Permissions: permissions,
+            // Roles: roles
         );
     }
 

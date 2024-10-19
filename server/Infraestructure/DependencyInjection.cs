@@ -1,5 +1,6 @@
 using System.Text;
 using System.Text.Json.Serialization;
+using Amazon.SQS;
 using Application._Common.Interfaces;
 using Application._Common.Interfaces.Authentication;
 using Application._Common.Services.Authentication;
@@ -37,10 +38,11 @@ public static class DependencyInjection
         services.AddPersistance();
         services.AddRepositories();
         services.AddInterceptor();
-        services.AddRabbitMqHandlers();
-        services.AddRabbitMq(builderConfiguration);
-        services.AddRabbitMqSubscriptions();
+        services.AddAsyncQueueHandlers();
         services.AddAuthentication(builderConfiguration);
+        services.AddSqs();
+        // services.AddRabbitMq(builderConfiguration);
+        // services.AddRabbitMqSubscriptions();
 
         return services;
     }
@@ -50,7 +52,7 @@ public static class DependencyInjection
         // CHANGED
         services.AddControllers().AddJsonOptions(x =>
             x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
-            // x.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault);
+        // x.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault);
 
 
         return services;
@@ -108,39 +110,48 @@ public static class DependencyInjection
                         Encoding.UTF8.GetBytes(configuration["JwtSettings:Key"]!))
                 };
             });
-        
+
         return services;
     }
 
-    public static IServiceCollection AddRabbitMq(this IServiceCollection services,
-        ConfigurationManager configuration)
-    {
-        // services.AddSingleton<IRabbitMqClient, RabbitMqClient>();
-
-        services.AddSingleton<IAsyncBus, RabbitMqBus>(sp =>
-            new RabbitMqBus(
-                sp.GetRequiredService<IMediator>(),
-                sp.GetRequiredService<IServiceScopeFactory>(),
-                configuration["RabbitMQ:HostName"]!,
-                sp.GetRequiredService<IMapper>()
-            )
-        );
-        return services;
-    }
-
-    public static IServiceCollection AddRabbitMqHandlers(this IServiceCollection services)
+    public static IServiceCollection AddAsyncQueueHandlers(this IServiceCollection services)
     {
         services.AddSingleton<IHandler<CreateCityQueueRequest>, CreateCityQueueHandler>();
         return services;
     }
-
-    // Register queues being consumed
-    public static IServiceCollection AddRabbitMqSubscriptions(this IServiceCollection services)
+    
+    public static IServiceCollection AddSqs(this IServiceCollection services) 
     {
-        var sp = services.BuildServiceProvider();
-        var amqpBus = sp.GetRequiredService<IAsyncBus>();
-        amqpBus.Subscribe("scrapper");
-
+        services.AddSingleton<IAmazonSQS, AmazonSQSClient>();
+        services.AddSingleton<IAsyncBus, SqsBus>();
         return services;
     }
+
+    // public static IServiceCollection AddRabbitMq(this IServiceCollection services,
+    //     ConfigurationManager configuration)
+    // {
+    //     // services.AddSingleton<IRabbitMqClient, RabbitMqClient>();
+    //
+    //     services.AddSingleton<IAsyncBus, RabbitMqBus>(sp =>
+    //         new RabbitMqBus(
+    //             sp.GetRequiredService<IMediator>(),
+    //             sp.GetRequiredService<IServiceScopeFactory>(),
+    //             configuration["RabbitMQ:HostName"]!,
+    //             sp.GetRequiredService<IMapper>()
+    //         )
+    //     );
+    //     return services;
+    // }
+    //
+    //
+    //
+    // // Register queues being consumed
+    // public static IServiceCollection AddRabbitMqSubscriptions(this IServiceCollection services)
+    // {
+    //     var sp = services.BuildServiceProvider();
+    //     var amqpBus = sp.GetRequiredService<IAsyncBus>();
+    //     amqpBus.Subscribe("scrapper");
+    //
+    //     return services;
+    // }
 }

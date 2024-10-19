@@ -38,7 +38,7 @@ public sealed class RabbitMqBus : IAsyncBus
     //     return _mediator.Send(command);
     // }
 
-    public async Task Publish<T>(T @event, QueueNames queueName) where T : IPublishableMessage
+    public async Task PublishAsync<T>(T @event, QueueNames queueName) where T : IPublishableMessage
     {
         var factory = new ConnectionFactory()
         {
@@ -122,7 +122,7 @@ public sealed class RabbitMqBus : IAsyncBus
             {
                 Type? contractType = _handlers[routingKey];
                 // Type? contractType = Type.GetType($"Infraestructure.Common.Async.Requests.${routingKey}");
-                IQueueRequest queueRequest = (IQueueRequest)JsonSerializer.Deserialize(message, contractType)!;
+                dynamic queueRequest = JsonSerializer.Deserialize(message, contractType)!;
 
                 // Gets the Handler for the incoming type
                 Type handlerType = typeof(IHandler<>).MakeGenericType(contractType);

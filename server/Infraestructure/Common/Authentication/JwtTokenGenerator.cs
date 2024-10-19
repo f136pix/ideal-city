@@ -2,6 +2,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Application._Common.Interfaces.Authentication;
+using Contracts.Subscriptions;
+using Domain.User.ValueObject;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
@@ -16,15 +18,16 @@ public class JwtTokenGenerator : IJwtTokenGenerator
         _jwtSettings = jwtSettings.Value;
     }
 
-    public string GenerateToken(Guid userId, string name)
+    public string GenerateToken(Guid userId, string name, Subscription userSubscription)
     {
         var claims = new[]
         {
             new Claim(JwtRegisteredClaimNames.Sub, userId.ToString()),
             new Claim(JwtRegisteredClaimNames.GivenName, name),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            new Claim("permissions", "gym:create"),
-            new Claim("permissions", "gym:update")
+            new Claim("subscription", userSubscription.SubscriptionType.Value.ToString())
+            // new Claim("permissions", "city:create"),
+            // new Claim("permissions", "city:update")
         };
 
         var signingCredentials = new SigningCredentials(

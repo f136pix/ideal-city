@@ -95,22 +95,22 @@ public sealed class User : AggregateRoot<UserId>
 
         var result = subscription.AddUser(this);
         if (result.IsError) return result.Errors;
+        
+        subscription.AddDomainEvent(new SubscriptionUpdated(subscription));
 
         return Result.Updated;
     }
 
     public ErrorOr<Updated> LeaveSubscription()
     {
-        if (Subscription is null)
-        {
-            return Error.NotFound("User is not in a subscription");
-        }
-
         var result = Subscription.RemoveUser(this);
         if (result.IsError) return result.Errors;
-
-        Subscription = null;
-        SubscriptionId = null;
+        
+        ErrorOr<Subscription> newSubscription = Subscription.Create(SubscriptionType.Basic);
+        Subscription = newSubscription.Value;
+        SubscriptionId = newSubscription.Value.Id;
+        
+        newSubscription.Value.AddDomainEvent(new SubscriptionUpdated(newSubscription.Value));
 
         return Result.Updated;
     }

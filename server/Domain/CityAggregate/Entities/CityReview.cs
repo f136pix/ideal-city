@@ -6,10 +6,8 @@ public sealed class CityReview : Entity<CityReviewId>
 {
     public string Review { get; private set; }
     public int Rating { get; private set; }
-    public CityId CityId { get; private set; }  
+    public CityId CityId { get; set; }  
     public CityAggregate.City City { get; private set; }
-
-    // ownerID
 
     private CityReview(CityReviewId cityReviewId, string review, int rating) : base(cityReviewId)
     {

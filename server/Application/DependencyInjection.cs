@@ -37,6 +37,9 @@ public static class DependencyInjection
         {
             options.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly);
             options.AddOpenBehavior(typeof(ValidationBehavior<,>));
+            options.AddOpenBehavior(typeof(AuthorizationBehavior<,>));
+            
+            
             
             // options.AddBehavior<IPipelineBehavior<CreateCityCommand, ErrorOr<City>>, CreateCityCommandBehavior>();
         }); 

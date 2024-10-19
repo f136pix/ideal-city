@@ -26,7 +26,8 @@ public class SubscriptionRepository : ISubscriptionRepository
 
     public Task<Subscription> UpdateAsync(Subscription entity)
     {
-        throw new NotImplementedException();
+        var subscription = _context.Update(entity);
+        return Task.FromResult(subscription.Entity);
     }
 
     public Task<Subscription> GetByIdAsync(SubscriptionId id)
