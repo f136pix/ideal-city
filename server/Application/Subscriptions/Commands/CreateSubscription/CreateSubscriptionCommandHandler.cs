@@ -68,7 +68,7 @@ public class CreateSubscriptionCommandHandler : IRequestHandler<CreateSubscripti
         await _subscriptionRepository.AddAsync(subscription.Value);
         await _userRepository.UpdateAsync(user);
         await _uow.CommitAsync();
-
+        
         return subscription.Value;
     }
 }

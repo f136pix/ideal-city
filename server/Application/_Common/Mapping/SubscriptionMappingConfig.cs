@@ -1,11 +1,15 @@
 using Application.Subscriptions.Commands;
+using Contracts.Subscriptions;
 using Contracts.Subsriptions;
-using Domain.Common;
+using Domain.User.ValueObject;
 using Mapster;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore.Update.Internal;
+using SubscriptionType = Domain.Common.SubscriptionType;
 
 namespace Application._Common.Mapping;
 
-public class SubscriptionMapping : IRegister
+public class SubscriptionMappingConfig : IRegister
 {
     public void Register(TypeAdapterConfig config)
     {
@@ -14,11 +18,16 @@ public class SubscriptionMapping : IRegister
         // src -> dest
         config.NewConfig<CreateSubscriptionRequest, CreateSubscriptionCommand>()
             .Map(dest => dest.SubscriptionType, src => GetSubscriptionType(src.SubscriptionType.ToString()));
+
+        config.NewConfig<Subscription, CreateSubscriptionResponse>()
+            .Map(dest => dest.Id, src => src.Id.Value)
+            .Map(dest => dest.SubscriptionType, src => src.SubscriptionType.Name)
+            .Map(dest => dest.IsActive, src => src.IsActive);
     }
-    
     
     private SubscriptionType GetSubscriptionType(string subscriptionType)
     {
         return SubscriptionType.FromName(subscriptionType.ToString());
     }
+    
 }
