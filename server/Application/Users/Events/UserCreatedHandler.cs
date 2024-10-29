@@ -16,7 +16,6 @@ public class UserCreatedHandler : INotificationHandler<UserCreated>
 
     public async Task Handle(UserCreated notification, CancellationToken cancellationToken)
     {
-        Console.WriteLine(notification.user.ToString());
         
        // Transform Domain Event in Publishable Message
        var userCreatedMessage = PublishableDomainEvent.Create(notification);

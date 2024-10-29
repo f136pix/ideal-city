@@ -1,5 +1,7 @@
 using Application.Subscriptions.Commands;
+using Application.Subscriptions.Commands.RemoveUserFromSubscription;
 using Contracts.Subscriptions;
+using Contracts.Subscriptions.RemoveUserFromSubscription;
 using Contracts.Subsriptions;
 using Domain.User.ValueObject;
 using Mapster;
@@ -23,6 +25,10 @@ public class SubscriptionMappingConfig : IRegister
             .Map(dest => dest.Id, src => src.Id.Value)
             .Map(dest => dest.SubscriptionType, src => src.SubscriptionType.Name)
             .Map(dest => dest.IsActive, src => src.IsActive);
+
+        config.NewConfig<Subscription, RemoveUserFromSubscriptionResponse>()
+            .Map(dest => dest.Id, src => src.Id.Value)
+            .Map(dest => dest.SubscriptionType, src => src.SubscriptionType.Name);
     }
     
     private SubscriptionType GetSubscriptionType(string subscriptionType)

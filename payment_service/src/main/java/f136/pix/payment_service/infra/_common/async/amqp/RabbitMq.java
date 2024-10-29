@@ -12,7 +12,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-@SpringBootApplication
+// To work with amqp remove the commented lines
+
+//@SpringBootApplication
 public class RabbitMq {
 
     static final String topicExchangeName = "spring-boot-exchange";
@@ -45,12 +47,12 @@ public class RabbitMq {
     }
 
     @Bean
-    MessageListenerAdapter listenerAdapter(Receiver receiver) {
+    MessageListenerAdapter listenerAdapter(RabbiMqConsumer receiver) {
         return new MessageListenerAdapter(receiver, "receiveMessage");
     }
 
-    public static void main(String[] args) throws InterruptedException {
-        SpringApplication.run(RabbitMq.class, args).close();
-    }
+//   public static void main(String[] args) throws InterruptedException {
+//      SpringApplication.run(RabbitMq.class, args).close();
+//}
 
 }

@@ -17,7 +17,7 @@ public class SqsBus : IAsyncBus
     {
         _sqsClient = sqsClient;
         _jsonOptions = jsonOptions;
-        GetQueueUrl(configuration.GetSection("SqsSettings:QueueName").Value).Wait();
+        GetQueueUrl(configuration.GetSection("SqsSettings:QueueName")!.Value).Wait();
     } 
 
     public void Subscribe(string queueName)
@@ -28,14 +28,16 @@ public class SqsBus : IAsyncBus
 
     public async Task PublishAsync<T>(T @event, QueueNames queueName) where T : IPublishableMessage
     {
-        var messageBody = JsonSerializer.Serialize(@event, _jsonOptions);
+        Console.WriteLine("Queue URL :" + _queueUrl);
+        var messageBody = JsonSerializer.Serialize(@event);
         var sendMessageRequest = new SendMessageRequest
         {
             QueueUrl = _queueUrl,
             MessageBody = messageBody,
         };
 
-        await _sqsClient.SendMessageAsync(sendMessageRequest);
+        var res = await _sqsClient.SendMessageAsync(sendMessageRequest);
+        return;
     }
     
     private async Task<string> GetQueueUrl(string queueName)

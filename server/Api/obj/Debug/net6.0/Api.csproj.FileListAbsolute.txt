@@ -79,3 +79,5 @@
 /home/filipe/Desktop/Projects/ideal-city/server/Api/bin/Debug/net6.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 /home/filipe/Desktop/Projects/ideal-city/server/Api/bin/Debug/net6.0/Microsoft.AspNetCore.Authorization.dll
 /home/filipe/Desktop/Projects/ideal-city/server/Api/bin/Debug/net6.0/Microsoft.AspNetCore.Metadata.dll
+/home/filipe/Desktop/Projects/ideal-city/server/Api/bin/Debug/net6.0/AWSSDK.Core.dll
+/home/filipe/Desktop/Projects/ideal-city/server/Api/bin/Debug/net6.0/AWSSDK.SQS.dll

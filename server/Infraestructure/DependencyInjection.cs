@@ -1,4 +1,5 @@
 using System.Text;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using Amazon.SQS;
 using Application._Common.Interfaces;
@@ -41,6 +42,7 @@ public static class DependencyInjection
         services.AddAsyncQueueHandlers();
         services.AddAuthentication(builderConfiguration);
         services.AddSqs();
+        services.AddJsonOptions();
         // services.AddRabbitMq(builderConfiguration);
         // services.AddRabbitMqSubscriptions();
 
@@ -126,6 +128,16 @@ public static class DependencyInjection
         services.AddSingleton<IAsyncBus, SqsBus>();
         return services;
     }
+    
+    public static IServiceCollection AddJsonOptions(this IServiceCollection services)
+    {
+        return services.AddSingleton(new JsonSerializerOptions()
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            WriteIndented = true
+        });
+    }
+
 
     // public static IServiceCollection AddRabbitMq(this IServiceCollection services,
     //     ConfigurationManager configuration)

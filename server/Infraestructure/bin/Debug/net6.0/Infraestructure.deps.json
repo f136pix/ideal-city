@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v6.0": {
       "Infraestructure/1.0.0": {
         "dependencies": {
+          "AWSSDK.SQS": "4.0.0-preview.4",
           "Application": "1.0.0",
           "ErrorOr": "2.0.1",
           "FluentValidation.AspNetCore": "11.3.0",
@@ -33,6 +34,25 @@
           "lib/net6.0/Ardalis.SmartEnum.dll": {
             "assemblyVersion": "8.0.0.0",
             "fileVersion": "8.0.0.0"
+          }
+        }
+      },
+      "AWSSDK.Core/4.0.0-preview.4": {
+        "runtime": {
+          "lib/netcoreapp3.1/AWSSDK.Core.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.0.0.0"
+          }
+        }
+      },
+      "AWSSDK.SQS/4.0.0-preview.4": {
+        "dependencies": {
+          "AWSSDK.Core": "4.0.0-preview.4"
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/AWSSDK.SQS.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.0.0.0"
           }
         }
       },
@@ -535,6 +555,20 @@
       "sha512": "sha512-qGIfpKhSQeLouycBLosGD4qFqgPa5NKzzkH/59oSHyfs3FSbaO6JChpNEMnkslOyQRLbRXj2ImkA0uZdX19IZA==",
       "path": "ardalis.smartenum/8.0.0",
       "hashPath": "ardalis.smartenum.8.0.0.nupkg.sha512"
+    },
+    "AWSSDK.Core/4.0.0-preview.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-VeekkHkQVHoQ/5n0Bmbzh0dlfqksMLMYftijZs6zIZ3uv1JWGDTxWHNw3H7FSf1933x1DQRTLSnPbvpTwVLbxw==",
+      "path": "awssdk.core/4.0.0-preview.4",
+      "hashPath": "awssdk.core.4.0.0-preview.4.nupkg.sha512"
+    },
+    "AWSSDK.SQS/4.0.0-preview.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-E4N0OSciBUmmNRYbMw9g+QvGelHcN3oZ1dRTVChSgsmDfQ8fQ5WctMagz1gPg3IaMNTqIX0pSKvoXiDTySEyzw==",
+      "path": "awssdk.sqs/4.0.0-preview.4",
+      "hashPath": "awssdk.sqs.4.0.0-preview.4.nupkg.sha512"
     },
     "ErrorOr/2.0.1": {
       "type": "package",

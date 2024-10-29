@@ -1,7 +1,9 @@
 using Application.Subscriptions.Commands;
 using Application.Subscriptions.Commands.AddUserToSubscription;
+using Application.Subscriptions.Commands.RemoveUserFromSubscription;
 using Contracts.Subscriptions;
 using Contracts.Subscriptions.AddUserToSubscription;
+using Contracts.Subscriptions.RemoveUserFromSubscription;
 using Contracts.Subsriptions;
 using Domain.User.ValueObject;
 using ErrorOr;
@@ -55,6 +57,18 @@ public class SubscriptionsController : ApiController
         ErrorOr<Subscription> result = await Invoke<Subscription>(command);
         return result.Match(
             subscription => Ok(_mapper.Map<AddUserToSubscriptionResponse>(subscription)), 
+            errors => Problem(errors)
+        ) ?? Problem("An unexpected error occurred");
+    }
+    
+    [HttpDelete]
+    public async Task<IActionResult> RemoveUserFromSubscription()
+    {
+        RemoveUserFromSubscriptionCommand command = new RemoveUserFromSubscriptionCommand();
+        
+        ErrorOr<Subscription> result = await Invoke<Subscription>(command);
+        return result.Match(
+            subscription => Ok(_mapper.Map<RemoveUserFromSubscriptionResponse>(subscription)), 
             errors => Problem(errors)
         ) ?? Problem("An unexpected error occurred");
     }

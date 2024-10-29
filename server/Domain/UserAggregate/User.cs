@@ -54,7 +54,7 @@ public sealed class User : AggregateRoot<UserId>
             bio);
 
         // add domain event
-        user.AddDomainEvent(new UserCreated(user));
+        user.AddDomainEvent(new UserCreated(email, name, subscription.SubscriptionType, subscription.Id.Value));
 
         return user;
     }
