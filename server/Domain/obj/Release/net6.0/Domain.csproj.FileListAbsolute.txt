@@ -1,0 +1,14 @@
+/home/filipe/Desktop/Projects/ideal-city/server/Domain/bin/Release/net6.0/Domain.deps.json
+/home/filipe/Desktop/Projects/ideal-city/server/Domain/bin/Release/net6.0/Domain.runtimeconfig.json
+/home/filipe/Desktop/Projects/ideal-city/server/Domain/bin/Release/net6.0/Domain.dll
+/home/filipe/Desktop/Projects/ideal-city/server/Domain/bin/Release/net6.0/ref/Domain.dll
+/home/filipe/Desktop/Projects/ideal-city/server/Domain/bin/Release/net6.0/Domain.pdb
+/home/filipe/Desktop/Projects/ideal-city/server/Domain/obj/Release/net6.0/Domain.csproj.AssemblyReference.cache
+/home/filipe/Desktop/Projects/ideal-city/server/Domain/obj/Release/net6.0/Domain.GeneratedMSBuildEditorConfig.editorconfig
+/home/filipe/Desktop/Projects/ideal-city/server/Domain/obj/Release/net6.0/Domain.AssemblyInfoInputs.cache
+/home/filipe/Desktop/Projects/ideal-city/server/Domain/obj/Release/net6.0/Domain.AssemblyInfo.cs
+/home/filipe/Desktop/Projects/ideal-city/server/Domain/obj/Release/net6.0/Domain.csproj.CoreCompileInputs.cache
+/home/filipe/Desktop/Projects/ideal-city/server/Domain/obj/Release/net6.0/Domain.dll
+/home/filipe/Desktop/Projects/ideal-city/server/Domain/obj/Release/net6.0/ref/Domain.dll
+/home/filipe/Desktop/Projects/ideal-city/server/Domain/obj/Release/net6.0/Domain.pdb
+/home/filipe/Desktop/Projects/ideal-city/server/Domain/obj/Release/net6.0/Domain.genruntimeconfig.cache

@@ -2,6 +2,138 @@
   "version": 3,
   "targets": {
     "net6.0": {
+      "Amazon.Lambda.APIGatewayEvents/2.7.1": {
+        "type": "package",
+        "compile": {
+          "lib/netcoreapp3.1/Amazon.Lambda.APIGatewayEvents.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/Amazon.Lambda.APIGatewayEvents.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Amazon.Lambda.ApplicationLoadBalancerEvents/2.2.0": {
+        "type": "package",
+        "compile": {
+          "lib/netcoreapp3.1/Amazon.Lambda.ApplicationLoadBalancerEvents.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/Amazon.Lambda.ApplicationLoadBalancerEvents.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Amazon.Lambda.AspNetCoreServer/9.0.1": {
+        "type": "package",
+        "dependencies": {
+          "Amazon.Lambda.APIGatewayEvents": "2.7.1",
+          "Amazon.Lambda.ApplicationLoadBalancerEvents": "2.2.0",
+          "Amazon.Lambda.Core": "2.3.0",
+          "Amazon.Lambda.Logging.AspNetCore": "3.1.0",
+          "Amazon.Lambda.Serialization.SystemTextJson": "2.4.3"
+        },
+        "compile": {
+          "lib/net6.0/Amazon.Lambda.AspNetCoreServer.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Amazon.Lambda.AspNetCoreServer.dll": {
+            "related": ".xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
+      "Amazon.Lambda.AspNetCoreServer.Hosting/1.7.1": {
+        "type": "package",
+        "dependencies": {
+          "Amazon.Lambda.APIGatewayEvents": "2.7.1",
+          "Amazon.Lambda.AspNetCoreServer": "9.0.1",
+          "Amazon.Lambda.Core": "2.3.0",
+          "Amazon.Lambda.RuntimeSupport": "1.11.0"
+        },
+        "compile": {
+          "lib/net6.0/Amazon.Lambda.AspNetCoreServer.Hosting.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Amazon.Lambda.AspNetCoreServer.Hosting.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Amazon.Lambda.Core/2.3.0": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/Amazon.Lambda.Core.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Amazon.Lambda.Core.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Amazon.Lambda.Logging.AspNetCore/3.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Amazon.Lambda.Core": "1.2.0",
+          "Microsoft.Extensions.Configuration.Abstractions": "2.1.0",
+          "Microsoft.Extensions.Logging": "2.1.0",
+          "Microsoft.Extensions.Logging.Abstractions": "2.1.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Amazon.Lambda.Logging.AspNetCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Amazon.Lambda.Logging.AspNetCore.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Amazon.Lambda.RuntimeSupport/1.11.0": {
+        "type": "package",
+        "dependencies": {
+          "Amazon.Lambda.Core": "2.3.0"
+        },
+        "compile": {
+          "lib/net6.0/Amazon.Lambda.RuntimeSupport.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Amazon.Lambda.RuntimeSupport.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Amazon.Lambda.Serialization.SystemTextJson/2.4.3": {
+        "type": "package",
+        "dependencies": {
+          "Amazon.Lambda.Core": "2.2.0"
+        },
+        "compile": {
+          "lib/net6.0/Amazon.Lambda.Serialization.SystemTextJson.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Amazon.Lambda.Serialization.SystemTextJson.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Ardalis.SmartEnum/8.0.0": {
         "type": "package",
         "dependencies": {
@@ -1066,6 +1198,142 @@
     }
   },
   "libraries": {
+    "Amazon.Lambda.APIGatewayEvents/2.7.1": {
+      "sha512": "ORuKOBjquor/clDL5ogeUoKEHt/iRmaC673gFpNzpwF5VkJ7LRvQc4MYnkeIexnXEwdS7yTkM4eSu9wzORi/wg==",
+      "type": "package",
+      "path": "amazon.lambda.apigatewayevents/2.7.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "amazon.lambda.apigatewayevents.2.7.1.nupkg.sha512",
+        "amazon.lambda.apigatewayevents.nuspec",
+        "lib/net8.0/Amazon.Lambda.APIGatewayEvents.dll",
+        "lib/net8.0/Amazon.Lambda.APIGatewayEvents.xml",
+        "lib/netcoreapp3.1/Amazon.Lambda.APIGatewayEvents.dll",
+        "lib/netcoreapp3.1/Amazon.Lambda.APIGatewayEvents.xml",
+        "lib/netstandard2.0/Amazon.Lambda.APIGatewayEvents.dll",
+        "lib/netstandard2.0/Amazon.Lambda.APIGatewayEvents.xml"
+      ]
+    },
+    "Amazon.Lambda.ApplicationLoadBalancerEvents/2.2.0": {
+      "sha512": "UtCd9tFuVyED8+DmDKEkdXJbAb/TdHIz51R/CsJCexKerO6HGOG87FGId4Ce9IXE+qjlBGyNQsKCw9oLLNe0hw==",
+      "type": "package",
+      "path": "amazon.lambda.applicationloadbalancerevents/2.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "amazon.lambda.applicationloadbalancerevents.2.2.0.nupkg.sha512",
+        "amazon.lambda.applicationloadbalancerevents.nuspec",
+        "lib/net8.0/Amazon.Lambda.ApplicationLoadBalancerEvents.dll",
+        "lib/net8.0/Amazon.Lambda.ApplicationLoadBalancerEvents.xml",
+        "lib/netcoreapp3.1/Amazon.Lambda.ApplicationLoadBalancerEvents.dll",
+        "lib/netcoreapp3.1/Amazon.Lambda.ApplicationLoadBalancerEvents.xml",
+        "lib/netstandard2.0/Amazon.Lambda.ApplicationLoadBalancerEvents.dll",
+        "lib/netstandard2.0/Amazon.Lambda.ApplicationLoadBalancerEvents.xml"
+      ]
+    },
+    "Amazon.Lambda.AspNetCoreServer/9.0.1": {
+      "sha512": "2HkqepxoVD3DAYqRdcXcl0dsoYCxxc5EJNmYIXZ2bUB1UT4RQatTg40HRt06P18LnPOJMr11kCwZE6OBaAVHTg==",
+      "type": "package",
+      "path": "amazon.lambda.aspnetcoreserver/9.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "amazon.lambda.aspnetcoreserver.9.0.1.nupkg.sha512",
+        "amazon.lambda.aspnetcoreserver.nuspec",
+        "lib/net6.0/Amazon.Lambda.AspNetCoreServer.dll",
+        "lib/net6.0/Amazon.Lambda.AspNetCoreServer.xml",
+        "lib/net8.0/Amazon.Lambda.AspNetCoreServer.dll",
+        "lib/net8.0/Amazon.Lambda.AspNetCoreServer.xml"
+      ]
+    },
+    "Amazon.Lambda.AspNetCoreServer.Hosting/1.7.1": {
+      "sha512": "KTICg8no4j1RPeIjGEf6yBlJAZ+BTaoNnLowIG2NA/l/Nl2M43JFpR2wU9T0SV3rj+uEMlZm7LOxjq8dca0QHQ==",
+      "type": "package",
+      "path": "amazon.lambda.aspnetcoreserver.hosting/1.7.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "amazon.lambda.aspnetcoreserver.hosting.1.7.1.nupkg.sha512",
+        "amazon.lambda.aspnetcoreserver.hosting.nuspec",
+        "lib/net6.0/Amazon.Lambda.AspNetCoreServer.Hosting.dll",
+        "lib/net6.0/Amazon.Lambda.AspNetCoreServer.Hosting.xml",
+        "lib/net8.0/Amazon.Lambda.AspNetCoreServer.Hosting.dll",
+        "lib/net8.0/Amazon.Lambda.AspNetCoreServer.Hosting.xml"
+      ]
+    },
+    "Amazon.Lambda.Core/2.3.0": {
+      "sha512": "GTZcqjNO87uaozSJpF8FxMuSgN5CX7GdXoLWp+rhF27MBmRtnTHCoGS69J0gSWnbsfVqh8DZIE5QOoP4BVxuOQ==",
+      "type": "package",
+      "path": "amazon.lambda.core/2.3.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "amazon.lambda.core.2.3.0.nupkg.sha512",
+        "amazon.lambda.core.nuspec",
+        "lib/net6.0/Amazon.Lambda.Core.dll",
+        "lib/net6.0/Amazon.Lambda.Core.xml",
+        "lib/net8.0/Amazon.Lambda.Core.dll",
+        "lib/net8.0/Amazon.Lambda.Core.xml",
+        "lib/netstandard2.0/Amazon.Lambda.Core.dll",
+        "lib/netstandard2.0/Amazon.Lambda.Core.xml"
+      ]
+    },
+    "Amazon.Lambda.Logging.AspNetCore/3.1.0": {
+      "sha512": "4SD+db3WUBMTl+0p/4C2/zalkG2gMFc9PYwLv4UGPkq6WUlek9hmom0igKkcGY5/1uprEdG/zQ5abKUfs6z0dQ==",
+      "type": "package",
+      "path": "amazon.lambda.logging.aspnetcore/3.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "amazon.lambda.logging.aspnetcore.3.1.0.nupkg.sha512",
+        "amazon.lambda.logging.aspnetcore.nuspec",
+        "lib/netstandard2.0/Amazon.Lambda.Logging.AspNetCore.dll",
+        "lib/netstandard2.0/Amazon.Lambda.Logging.AspNetCore.xml"
+      ]
+    },
+    "Amazon.Lambda.RuntimeSupport/1.11.0": {
+      "sha512": "pdqx07ynFABzanPmTEGvhnvkldTrJc6PmRXDC+dkhb8jVQTn77SkiWYcpEuDSE3vbuJJK5UTQlIn19S/gfaBTQ==",
+      "type": "package",
+      "path": "amazon.lambda.runtimesupport/1.11.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "amazon.lambda.runtimesupport.1.11.0.nupkg.sha512",
+        "amazon.lambda.runtimesupport.nuspec",
+        "lib/net5.0/Amazon.Lambda.RuntimeSupport.dll",
+        "lib/net5.0/Amazon.Lambda.RuntimeSupport.xml",
+        "lib/net6.0/Amazon.Lambda.RuntimeSupport.dll",
+        "lib/net6.0/Amazon.Lambda.RuntimeSupport.xml",
+        "lib/net8.0/Amazon.Lambda.RuntimeSupport.dll",
+        "lib/net8.0/Amazon.Lambda.RuntimeSupport.xml",
+        "lib/netstandard2.0/Amazon.Lambda.RuntimeSupport.dll",
+        "lib/netstandard2.0/Amazon.Lambda.RuntimeSupport.xml"
+      ]
+    },
+    "Amazon.Lambda.Serialization.SystemTextJson/2.4.3": {
+      "sha512": "z953iA/X1APxBeYblKASZnJYRe2dIqArP+MIsEq6cF/7EI+p+8Uzh01m/NgZgvAiimWOapGplioqPKDQN9Qubw==",
+      "type": "package",
+      "path": "amazon.lambda.serialization.systemtextjson/2.4.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "amazon.lambda.serialization.systemtextjson.2.4.3.nupkg.sha512",
+        "amazon.lambda.serialization.systemtextjson.nuspec",
+        "lib/net6.0/Amazon.Lambda.Serialization.SystemTextJson.dll",
+        "lib/net6.0/Amazon.Lambda.Serialization.SystemTextJson.xml",
+        "lib/net8.0/Amazon.Lambda.Serialization.SystemTextJson.dll",
+        "lib/net8.0/Amazon.Lambda.Serialization.SystemTextJson.xml",
+        "lib/netcoreapp3.1/Amazon.Lambda.Serialization.SystemTextJson.dll",
+        "lib/netcoreapp3.1/Amazon.Lambda.Serialization.SystemTextJson.xml"
+      ]
+    },
     "Ardalis.SmartEnum/8.0.0": {
       "sha512": "qGIfpKhSQeLouycBLosGD4qFqgPa5NKzzkH/59oSHyfs3FSbaO6JChpNEMnkslOyQRLbRXj2ImkA0uZdX19IZA==",
       "type": "package",
@@ -2750,6 +3018,8 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "Amazon.Lambda.AspNetCoreServer >= 9.0.1",
+      "Amazon.Lambda.AspNetCoreServer.Hosting >= 1.7.1",
       "Application >= 1.0.0",
       "Contracts >= 1.0.0",
       "ErrorOr >= 2.0.1",
@@ -2815,6 +3085,14 @@
       "net6.0": {
         "targetAlias": "net6.0",
         "dependencies": {
+          "Amazon.Lambda.AspNetCoreServer": {
+            "target": "Package",
+            "version": "[9.0.1, )"
+          },
+          "Amazon.Lambda.AspNetCoreServer.Hosting": {
+            "target": "Package",
+            "version": "[1.7.1, )"
+          },
           "ErrorOr": {
             "target": "Package",
             "version": "[2.0.1, )"
@@ -2880,6 +3158,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.NETCore.App.Crossgen2.linux-x64",
+            "version": "[6.0.35, 6.0.35]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"

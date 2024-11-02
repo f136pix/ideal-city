@@ -23,3 +23,15 @@ run-scrapper:
 	echo "Running the Scrapper"
 	php ./scrapper/src/App.php
 	echo "Scrapper is running"
+	
+.PHONY: run-dotnet
+run-dotnet:
+	echo "Running the Dotnet App"
+	kubectl apply -f ./K8S/dotnet-app.yml
+	echo "Dotnet App is running"
+	
+.PHONY: run-spring
+run-spring:
+	echo "Running the Spring App"
+	kubectl apply -f ./K8S/java-app.yml
+	echo "Java App is running"

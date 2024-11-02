@@ -1,9 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "3UkGvfPUuA14CKz8i9Rx3XbeHETmZ4sLq7VpjoeHuiYXBUk0mZmO5xFYLKm3QTnFY1fohZc9bOdDa1enVHneyQ==",
+  "dgSpecHash": "F2yVXnThiL6ByyPMhsXcVSPcc5zuyIY4k1ALk1KoEbY8W7BWXFDPgADaOhM3o+FL+9OVz7HHfQFVBK9bMH5UXw==",
   "success": true,
   "projectFilePath": "/home/filipe/Desktop/Projects/ideal-city/server/Api/Api.csproj",
   "expectedPackageFiles": [
+    "/home/filipe/.nuget/packages/amazon.lambda.apigatewayevents/2.7.1/amazon.lambda.apigatewayevents.2.7.1.nupkg.sha512",
+    "/home/filipe/.nuget/packages/amazon.lambda.applicationloadbalancerevents/2.2.0/amazon.lambda.applicationloadbalancerevents.2.2.0.nupkg.sha512",
+    "/home/filipe/.nuget/packages/amazon.lambda.aspnetcoreserver/9.0.1/amazon.lambda.aspnetcoreserver.9.0.1.nupkg.sha512",
+    "/home/filipe/.nuget/packages/amazon.lambda.aspnetcoreserver.hosting/1.7.1/amazon.lambda.aspnetcoreserver.hosting.1.7.1.nupkg.sha512",
+    "/home/filipe/.nuget/packages/amazon.lambda.core/2.3.0/amazon.lambda.core.2.3.0.nupkg.sha512",
+    "/home/filipe/.nuget/packages/amazon.lambda.logging.aspnetcore/3.1.0/amazon.lambda.logging.aspnetcore.3.1.0.nupkg.sha512",
+    "/home/filipe/.nuget/packages/amazon.lambda.runtimesupport/1.11.0/amazon.lambda.runtimesupport.1.11.0.nupkg.sha512",
+    "/home/filipe/.nuget/packages/amazon.lambda.serialization.systemtextjson/2.4.3/amazon.lambda.serialization.systemtextjson.2.4.3.nupkg.sha512",
     "/home/filipe/.nuget/packages/ardalis.smartenum/8.0.0/ardalis.smartenum.8.0.0.nupkg.sha512",
     "/home/filipe/.nuget/packages/awssdk.core/4.0.0-preview.4/awssdk.core.4.0.0-preview.4.nupkg.sha512",
     "/home/filipe/.nuget/packages/awssdk.sqs/4.0.0-preview.4/awssdk.sqs.4.0.0-preview.4.nupkg.sha512",
@@ -62,7 +70,8 @@
     "/home/filipe/.nuget/packages/system.memory/4.5.5/system.memory.4.5.5.nupkg.sha512",
     "/home/filipe/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.0/system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "/home/filipe/.nuget/packages/system.text.encodings.web/7.0.0/system.text.encodings.web.7.0.0.nupkg.sha512",
-    "/home/filipe/.nuget/packages/system.text.json/7.0.0/system.text.json.7.0.0.nupkg.sha512"
+    "/home/filipe/.nuget/packages/system.text.json/7.0.0/system.text.json.7.0.0.nupkg.sha512",
+    "/home/filipe/.nuget/packages/microsoft.netcore.app.crossgen2.linux-x64/6.0.35/microsoft.netcore.app.crossgen2.linux-x64.6.0.35.nupkg.sha512"
   ],
   "logs": [
     {

@@ -81,3 +81,12 @@
 /home/filipe/Desktop/Projects/ideal-city/server/Api/bin/Debug/net6.0/Microsoft.AspNetCore.Metadata.dll
 /home/filipe/Desktop/Projects/ideal-city/server/Api/bin/Debug/net6.0/AWSSDK.Core.dll
 /home/filipe/Desktop/Projects/ideal-city/server/Api/bin/Debug/net6.0/AWSSDK.SQS.dll
+/home/filipe/Desktop/Projects/ideal-city/server/Api/bin/Debug/net6.0/aws-lambda-tools-defaults.json
+/home/filipe/Desktop/Projects/ideal-city/server/Api/bin/Debug/net6.0/Amazon.Lambda.APIGatewayEvents.dll
+/home/filipe/Desktop/Projects/ideal-city/server/Api/bin/Debug/net6.0/Amazon.Lambda.ApplicationLoadBalancerEvents.dll
+/home/filipe/Desktop/Projects/ideal-city/server/Api/bin/Debug/net6.0/Amazon.Lambda.AspNetCoreServer.dll
+/home/filipe/Desktop/Projects/ideal-city/server/Api/bin/Debug/net6.0/Amazon.Lambda.AspNetCoreServer.Hosting.dll
+/home/filipe/Desktop/Projects/ideal-city/server/Api/bin/Debug/net6.0/Amazon.Lambda.Core.dll
+/home/filipe/Desktop/Projects/ideal-city/server/Api/bin/Debug/net6.0/Amazon.Lambda.Logging.AspNetCore.dll
+/home/filipe/Desktop/Projects/ideal-city/server/Api/bin/Debug/net6.0/Amazon.Lambda.RuntimeSupport.dll
+/home/filipe/Desktop/Projects/ideal-city/server/Api/bin/Debug/net6.0/Amazon.Lambda.Serialization.SystemTextJson.dll

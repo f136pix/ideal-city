@@ -4,9 +4,17 @@
         <TargetFramework>net6.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+        <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+        <AWSProjectType>Lambda</AWSProjectType>
+        <!-- This property makes the build directory similar to a publish directory and helps the AWS .NET Lambda Mock Test Tool find project dependencies. -->
+        <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+        <!-- Generate ready to run images during publishing to improve cold start time. -->
+        <PublishReadyToRun>true</PublishReadyToRun>
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Amazon.Lambda.AspNetCoreServer" Version="9.0.1" />
+        <PackageReference Include="Amazon.Lambda.AspNetCoreServer.Hosting" Version="1.7.1" />
         <PackageReference Include="ErrorOr" Version="2.0.1" />
         <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
         <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.2" />
@@ -23,6 +31,7 @@
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.3" />
         <PackageReference Include="RabbitMQ.Client" Version="7.0.0-rc.6" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0"/>
+        
     </ItemGroup>
 
     <ItemGroup>
