@@ -32,7 +32,7 @@ dotnet lambda deploy-function <lambda-name>
 > When prompted about the IAM Role, chose one that has access to SQS and RDS services.
 
 - Access the healthCheck on your browser to make sure everything is working fine:
-![img_2.png](img_2.png)
+![img_2.png](stuff/img_2.png)
 ```shell
 curl https://<function-url>/health
 ```
@@ -45,7 +45,7 @@ Create both the [EC2 and the RDS instance on the same VPC](https://docs.aws.amaz
 
 Build the Jar locally and dockerize it, configuring the application.properties according to RDS instance configurations , in this example the connection string would be `jdbc:postgresql://ideal-city.c7ooue240k4c.sa-east-1.rds.amazonaws.com:5432/ideal`, note we are also pushing the image to dockerhub
 
-![img.png](img.png)
+![img.png](stuff/img.png)
 > Remember configuring the username, password and the database according to the ones created in the RDS instance.
 
 ```shell
@@ -97,7 +97,7 @@ sudo docker run -d -p 80:8080 -p 443:8080 f136pix/payment-service:latest
 ``` 
 
 - Try accessing the healthCheck in your browser to confirm everything is working fine:
-![img_1.png](img_1.png)
+![img_1.png](stuff/img_1.png)
 ```shell
 curl <public-ipv4>/health 
 ```
